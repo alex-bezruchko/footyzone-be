@@ -1,0 +1,45 @@
+{
+  "name": "webapi-blog",
+  "version": "1.0.0",
+  "description": "Web API Blog Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LambdaSchool/Node-Blog.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "blog",
+    "api"
+  ],
+  "author": "Lambda School",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LambdaSchool/Node-Blog/issues"
+  },
+  "homepage": "https://github.com/LambdaSchool/Node-Blog#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.14.0",
+    "cors": "^2.8.5",
+    "datauri": "^1.1.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "helmet": "^3.15.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.16.3",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "pg": "^7.9.0",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "knex-cleaner": "^1.1.4",
+    "nodemon": "^1.18.10"
+  }
+}
