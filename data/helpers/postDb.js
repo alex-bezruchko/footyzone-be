@@ -16,7 +16,7 @@ function get() {
 
 function getByCategoryId(id) {
   return db('posts')
-    .where('category_id', id)
+    .where({ category_id: id })
     // .then()
 }
 function getById(id) {
