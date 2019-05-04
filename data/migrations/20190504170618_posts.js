@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
         posts
             .integer('category_id')
             .unsigned()
-            .notNullable()
+            // .notNullable()
             .references('id')
             .inTable('categories');
     })
