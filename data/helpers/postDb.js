@@ -1,17 +1,28 @@
 const db = require('../dbConfig.js');
 
 module.exports = {
-  get,
+  welcomePosts,
+  fetchAll,
+  getByCategoryId
   getById,
   insert,
   update,
   remove,
   removeByUser,
-  getByCategoryId
 };
 
-function get() {
-  return db('posts');
+function welcomePosts() {
+  return db('posts').limit(5);
+}
+
+function fetchAll() {
+  return knex('posts')
+    .paginate(15, 1, true)
+    .then(paginator => {
+        console.log(paginator.current_page);
+        console.log(paginator.data);
+        return paginator.data
+    });
 }
 
 function getByCategoryId(id) {
@@ -19,6 +30,7 @@ function getByCategoryId(id) {
     .where({ category_id: id })
     // .then()
 }
+
 function getById(id) {
   return db('posts')
     .where({ id })

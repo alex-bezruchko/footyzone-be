@@ -38,7 +38,7 @@ cloudinary.config({
 
 router.get('/', async (req, res) => {
 
-    const posts = await postDb.get(req.query);
+    const posts = await postDb.fetchAll();
 
     try {
         if (posts) {
