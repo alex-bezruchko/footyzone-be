@@ -29,7 +29,7 @@ function getUserPosts(userId) {
 
 async function insert(user) {
   return db('users')
-    .insert(user)
+    .insert(user, 'id')
     .then(ids => {
       return getById(ids[0]);
     });
