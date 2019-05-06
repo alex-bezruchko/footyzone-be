@@ -20,6 +20,7 @@ const imageFilter = (req, file, cb) => {
         cb(new Error('Only jpeg, jpg, png files are allowed.'), false);
     }
 }
+
 // Multer Upload Config
 const upload = multer({ 
     storage: storage, 
@@ -29,11 +30,30 @@ const upload = multer({
         fileFilter: imageFilter
     }
 });
+
 // Cloudinary Config
+
 cloudinary.config({
     cloud_name: 'htg1iqq1p',
     api_key: '915419188456665',
     api_secret: 'M7938KD1Akyo8XBTmf7jF68jiHA'
+})
+
+router.get('/welcome', async (req, res) => {
+
+    const posts = await postDb.welcomePosts();
+
+    try {
+        if (posts) {
+            res.status(200).json(posts);
+        }
+        else {
+            res.status(404).json('There are no available posts.')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e)
+    }
 })
 
 router.get('/', async (req, res) => {
