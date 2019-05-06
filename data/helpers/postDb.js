@@ -3,7 +3,7 @@ const db = require('../dbConfig.js');
 module.exports = {
   welcomePosts,
   fetchAll,
-  getByCategoryId
+  getByCategoryId,
   getById,
   insert,
   update,
