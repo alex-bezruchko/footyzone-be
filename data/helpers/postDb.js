@@ -15,14 +15,12 @@ function welcomePosts() {
   return db('posts').limit(5);
 }
 
+function latest() {
+  return db('posts').limit(10);
+}
+
 function fetchAll() {
-  return knex('posts')
-    .paginate(15, 1, true)
-    .then(paginator => {
-        console.log(paginator.current_page);
-        console.log(paginator.data);
-        return paginator.data
-    });
+  return db('posts')
 }
 
 function getByCategoryId(id) {
