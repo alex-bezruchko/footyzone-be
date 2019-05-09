@@ -37,7 +37,7 @@ function getById(id) {
 
 function insert(post) {
   return db('posts')
-    .insert(post)
+    .insert(post, 'id')
     .then(ids => {
       return getById(ids[0]);
     });
@@ -46,7 +46,10 @@ function insert(post) {
 function update(id, changes) {
   return db('posts')
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .then(function() {
+      return getById(id);
+    });
 }
 
 function remove(id) {
