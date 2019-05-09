@@ -12,7 +12,7 @@ module.exports = {
 };
 
 function welcomePosts() {
-  return db('posts').limit(5);
+  return db('posts').limit(5).orderBy('id');
 }
 
 function latest() {

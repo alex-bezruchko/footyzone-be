@@ -154,7 +154,7 @@ router.post('/', upload.single('postMainImg'), (req, res) => {
     })
 });
 
-router.put('/:id', upload.single('postMainImg'), async (req, res) => {
+router.put('/:id', upload.single('postMainImg'), (req, res) => {
 
     const id = req.params.id;
     const post = req.body;
@@ -167,36 +167,21 @@ router.put('/:id', upload.single('postMainImg'), async (req, res) => {
 
         post.postMainImg = result.secure_url;
 
-        // postDb.update(id, post)
-        // .then(res => {
-        //     console.log(res)
-        //     if (res) {
-        //         res.status(201).json('Item updated.');
-        //     }
-        //     else {
-        //         res.status(404).json('Please enter title and body.');
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     res.status(500).json(err);
-        // })
-
-        try {
-            const updatedPost = await postDb.update(id, post);
-            console.log(updatedPost)
-
-            if (updatedPost) {
-                console.log(updatedPost)
+        postDb.update(id, post)
+        .then(res => {
+            console.log(res)
+            if (res) {
                 res.status(201).json({updatedPost, message: 'Post was updated.'});
             }
             else {
-                req.status(404).json('Post id is unavailable.')
+                res.status(404).json('Please enter title and body.');
             }
-        }
-        catch (e) {
-            res.status(500).json(e);
-        }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err);
+        })
+
 
     })
 })
