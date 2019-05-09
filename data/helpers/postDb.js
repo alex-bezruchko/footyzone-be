@@ -43,7 +43,7 @@ function insert(post) {
     });
 }
 
-function update(id, changes) {
+async function update(id, changes) {
   return db('posts')
     .where({ id })
     .update(changes)
