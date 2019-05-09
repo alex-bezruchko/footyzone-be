@@ -169,6 +169,7 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
 
         postDb.update(id, post)
         .then(res => {
+            console.log(res)
             if (res) {
                 res.status(201).json('Item updated.');
             }
@@ -177,6 +178,7 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json(err);
         })
 
