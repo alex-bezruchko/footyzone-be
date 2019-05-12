@@ -128,7 +128,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', upload.single('postMainImg'), (req, res) => {
-    const post = req.body;
+    const newPost = req.body;
     
     const imageUri = req => newUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
@@ -136,12 +136,12 @@ router.post('/', upload.single('postMainImg'), (req, res) => {
     
     cloudinary.uploader.upload(file, result => {
 
-        post.postMainImg = result.secure_url;
+        newPost.postMainImg = result.secure_url;
 
-        postDb.insert(post)
-        .then(res => {
-            if (res) {
-                res.status(201).json('Item Added.');
+        postDb.insert(newPost)
+        .then(addedPost => {
+            if (addedPost) {
+                res.status(201).json({addedPost, message: 'Post was successfully added.'});
             }
             else {
                 res.status(404).json('Please enter title and body.');
@@ -169,10 +169,10 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
         updatedPost.postMainImg = result.secure_url;
 
         postDb.update(id, updatedPost)
-        .then(res => {
+        .then(post => {
             console.log(res)
-            if (res) {
-                res.status(201).json({updatedPost, message: 'Post was updated.'});
+            if (post) {
+                res.status(201).json({post, message: 'Post was updated.'});
             }
             else {
                 res.status(404).json('Please enter title and body.');
