@@ -158,6 +158,7 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
 
     const id = req.params.id;
     const post = req.body;
+    console.log(req.file);
     
     const imageUri = req => newUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
