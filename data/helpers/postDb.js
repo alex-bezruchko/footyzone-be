@@ -3,6 +3,7 @@ const db = require('../dbConfig.js');
 module.exports = {
   welcomePosts,
   fetchAll,
+  fetchAllCategories,
   getByCategoryId,
   getById,
   insert,
@@ -21,6 +22,10 @@ function latest() {
 
 function fetchAll() {
   return db('posts')
+}
+
+function fetchAllCategories() {
+  return db('categories')
 }
 
 function getByCategoryId(id) {
