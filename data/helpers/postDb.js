@@ -10,6 +10,7 @@ module.exports = {
   update,
   remove,
   removeByUser,
+  fetchUsersPosts
 };
 
 function welcomePosts() {
