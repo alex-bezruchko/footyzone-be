@@ -50,6 +50,25 @@ router.get('/', restricted, async (req, res) => {
     }
 })
 
+router.get('/:id/posts', restricted, async (req, res) => {
+
+    try {
+        const usersPosts = await postDb.fetchUsersPosts(id);
+
+        if (usersPosts) {
+            res.status(200).json(usersPosts);
+        }
+        else {
+            res.status(404).json(`Users are not available.`)
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+})
+
+
+
 router.post('/', async (req, res) => {
 
     const newUser = req.body;
