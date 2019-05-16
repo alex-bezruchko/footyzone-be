@@ -26,7 +26,7 @@ function fetchAll() {
 }
 
 function fetchUsersPosts(id) {
-  return db(posts).where({'user_id': id})
+  return db('posts').where({'user_id': id})
 }
 
 function fetchAllCategories() {
