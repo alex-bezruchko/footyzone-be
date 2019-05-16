@@ -52,9 +52,10 @@ router.get('/', restricted, async (req, res) => {
 
 router.get('/:id/posts', async (req, res) => {
     const id = req.params.id;
-
+    console.log(id)
     try {
         const usersPosts = await postDb.fetchUsersPosts(id);
+        console.log(userPosts)
 
         if (usersPosts) {
             res.status(200).json(usersPosts);
@@ -64,6 +65,7 @@ router.get('/:id/posts', async (req, res) => {
         }
     }
     catch (e) {
+        console.log(e);
         res.status(500).json(e);
     }
 })
