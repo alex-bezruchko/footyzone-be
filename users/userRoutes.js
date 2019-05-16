@@ -51,6 +51,7 @@ router.get('/', restricted, async (req, res) => {
 })
 
 router.get('/:id/posts', restricted, async (req, res) => {
+    const id = req.params.id;
 
     try {
         const usersPosts = await postDb.fetchUsersPosts(id);
