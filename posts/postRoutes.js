@@ -149,30 +149,49 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
     const newPost = req.body;
     const postImageFile = req.file.buffer;
     const postImageName = req.file.originalname;
-    const imageUri = req => newUri.format(path.extname(postImageName).toString(), postImageFile);
 
-    const file = imageUri(req).content;
-    
-    cloudinary.uploader.upload(file, result => {
+    if (postImageFile && postImageName) {
+        const imageUri = req => newUri.format(path.extname(postImageName).toString(), postImageFile);
 
-        newPost.postMainImg = result.secure_url;
+        const file = imageUri(req).content;
+        
+        cloudinary.uploader.upload(file, result => {
 
+            newPost.postMainImg = result.secure_url;
+
+            postDb.insert(newPost)
+            console.log(newPost)
+            .then(addedPost => {
+                if (addedPost) {
+                    res.status(201).json({addedPost, message: 'Post was successfully added.'});
+                }
+                else {
+                    res.status(404).json('Please enter title and body.');
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json(err);
+            })
+
+        }) 
+    } else {
         postDb.insert(newPost)
-        console.log(newPost)
-        .then(addedPost => {
-            if (addedPost) {
-                res.status(201).json({addedPost, message: 'Post was successfully added.'});
-            }
-            else {
-                res.status(404).json('Please enter title and body.');
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json(err);
-        })
-
-    })
+            console.log(newPost)
+            .then(addedPost => {
+                if (addedPost) {
+                    res.status(201).json({addedPost, message: 'Post was successfully added.'});
+                }
+                else {
+                    res.status(404).json('Please enter title and body.');
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json(err);
+            })
+    }
+    
 });
 
 router.put('/:id', restricted, upload.single('postMainImg'), (req, res) => {
