@@ -158,6 +158,7 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
         newPost.postMainImg = result.secure_url;
 
         postDb.insert(newPost)
+        console.log(newPost)
         .then(addedPost => {
             if (addedPost) {
                 res.status(201).json({addedPost, message: 'Post was successfully added.'});
@@ -167,6 +168,7 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json(err);
         })
 
