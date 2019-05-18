@@ -6,23 +6,6 @@ const restricted = require('../auth/restricted.js');
 
 router.use(express.json());
 
-function upperCase(req, res, next) {
-
-    const name = req.body.name;
-    // console.log(req.body);
-    const modified = name;
-    modified[0] = modified[0].toUpperCase();
-
-    if (name === modified) {
-        next();
-    }
-    else {
-        res.json({ 
-            message: 'User is not capitalized.',
-            err: 'User is not capitalized.'
-        })    
-    }
-}
 router.use((err, req, res, next) => {
   
     res
