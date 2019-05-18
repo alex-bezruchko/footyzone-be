@@ -7,6 +7,7 @@ const router = express.Router();
 const dataUri = require('datauri');
 const path = require('path');
 const newUri = new dataUri();
+const restricted = require('./../auth/restricted.js');
 
 router.use(express.json());
 // Multer Storage
@@ -144,7 +145,7 @@ router.get('/:id', async (req, res) => {
 
 })
 
-router.post('/', upload.single('postMainImg'), (req, res) => {
+router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
     const newPost = req.body;
     
     const imageUri = req => newUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
@@ -171,11 +172,10 @@ router.post('/', upload.single('postMainImg'), (req, res) => {
     })
 });
 
-router.put('/:id', upload.single('postMainImg'), (req, res) => {
+router.put('/:id', restricted, upload.single('postMainImg'), (req, res) => {
 
     const id = req.params.id;
     const updatedPost = req.body;
-    console.log(req.file);
     
     const imageUri = req => newUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
@@ -187,7 +187,6 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
 
         postDb.update(id, updatedPost)
         .then(post => {
-            console.log(res)
             if (post) {
                 res.status(201).json({post, message: 'Post was updated.'});
             }
@@ -196,7 +195,6 @@ router.put('/:id', upload.single('postMainImg'), (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err)
             res.status(500).json(err);
         })
 
