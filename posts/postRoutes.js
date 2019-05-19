@@ -149,7 +149,7 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
     const newPost = req.body;
     
     console.log(newPost);
-    if (!req.file.buffer && !req.file.originalname) { 
+    if (req.file.buffer === undefined && req.file.originalname === undefined) { 
         postDb.insert(newPost)
         console.log(newPost)
         .then(addedPost => {
