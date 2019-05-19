@@ -149,7 +149,22 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
     const newPost = req.body;
     
     console.log(newPost);
-    if (req.file.buffer && req.file.originalname) {
+    if (!req.file.buffer && !req.file.originalname) { 
+        postDb.insert(newPost)
+        console.log(newPost)
+        .then(addedPost => {
+            if (addedPost) {
+                res.status(201).json({addedPost, message: 'Post was successfully added.'});
+            }
+            else {
+                res.status(404).json('Please enter title and body.');
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err);
+        })
+    } else {
         const postImageFile = req.file.buffer;
         const postImageName = req.file.originalname;
         const imageUri = req => newUri.format(path.extname(postImageName).toString(), postImageFile);
@@ -175,22 +190,7 @@ router.post('/', restricted, upload.single('postMainImg'), (req, res) => {
                 res.status(500).json(err);
             })
 
-        }) 
-    } else {
-        postDb.insert(newPost)
-            console.log(newPost)
-            .then(addedPost => {
-                if (addedPost) {
-                    res.status(201).json({addedPost, message: 'Post was successfully added.'});
-                }
-                else {
-                    res.status(404).json('Please enter title and body.');
-                }
-            })
-            .catch(err => {
-                console.log(err)
-                res.status(500).json(err);
-            })
+        })
     }
     
 });
