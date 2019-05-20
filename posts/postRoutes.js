@@ -134,11 +134,11 @@ router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
   console.log(req);
   console.log(newPost);
   if (req.file) {
-    const postImageName = req.file.originalname;
-    const postImageFile = req.file.buffer;
-
     const imageUri = req =>
-      newUri.format(path.extname(postImageName).toString(), postImageFile);
+      newUri.format(
+        path.extname(req.file.originalname).toString(),
+        req.file.buffer
+      );
 
     const file = imageUri(req).content;
 
