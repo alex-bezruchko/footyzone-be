@@ -143,6 +143,8 @@ router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
     const file = imageUri(req).content;
 
     cloudinary.uploader.upload(file, result => {
+      console.log(file);
+      console.log(result);
       newPost.postMainImg = result.secure_url;
       console.log(newPost);
       postDb
