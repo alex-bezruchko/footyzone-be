@@ -131,39 +131,21 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
   const newPost = req.body;
-  console.log(req);
-  console.log(newPost);
-  if (req.file) {
-    const imageUri = req =>
-      newUri.format(
-        path.extname(req.file.originalname).toString(),
-        req.file.buffer
-      );
 
-    const file = imageUri(req).content;
+  const imageUri = req =>
+    newUri.format(
+      path.extname(req.file.originalname).toString(),
+      req.file.buffer
+    );
 
-    cloudinary.uploader.upload(file, result => {
-      console.log(file);
-      console.log(result);
+  const file = imageUri(req).content;
+
+  cloudinary.uploader.upload(file, result => {
+    if (result) {
       newPost.postMainImg = result.secure_url;
-      console.log(newPost);
-      postDb
-        .insert(newPost)
-        .then(addedPost => {
-          if (addedPost) {
-            res
-              .status(201)
-              .json({ addedPost, message: "Post was successfully added." });
-          } else {
-            res.status(404).json("Please enter title and body.");
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-        });
-    });
-  } else {
+    } else {
+      newPost.postMainImg = "";
+    }
     postDb
       .insert(newPost)
       .then(addedPost => {
@@ -179,7 +161,7 @@ router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-  }
+  });
 });
 
 router.put("/:id", restricted, upload.single("postMainImg"), (req, res) => {
