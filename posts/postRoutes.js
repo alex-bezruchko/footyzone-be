@@ -143,9 +143,9 @@ router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
 
     cloudinary.uploader.upload(file, result => {
       newPost.postMainImg = result.secure_url;
-      console.log(newPost)
-      postDb.insert(newPost);
-      
+      console.log(newPost);
+      postDb
+        .insert(newPost)
         .then(addedPost => {
           if (addedPost) {
             res
