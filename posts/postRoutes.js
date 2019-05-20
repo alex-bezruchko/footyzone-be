@@ -131,7 +131,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", restricted, upload.single("postMainImg"), (req, res) => {
   const newPost = req.body;
-
+  console.log(req.file);
   console.log(newPost);
   if (req.file) {
     console.log(req.file);
