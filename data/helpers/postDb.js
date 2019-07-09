@@ -24,7 +24,20 @@ function latest() {
 }
 
 function fetchAll() {
-  return db("posts");
+  return db
+    .select(
+      "posts.title",
+      "posts.summary",
+      "posts.body",
+      "posts.postMainImg",
+      "posts.user_id",
+      "posts.category_id",
+      "users.username",
+      "categories.category_name"
+    )
+    .from("posts")
+    .leftJoin("users", "users.id", "=", "posts.user_id")
+    .leftJoin("categories", "categories.id", "=", "posts.category_id");
 }
 
 function fetchUsersPosts(id) {
