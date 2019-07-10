@@ -57,6 +57,7 @@ function getById(post_id) {
     .select(
       "posts.title",
       "posts.summary",
+      "posts.published",
       "posts.body",
       "posts.postMainImg",
       "posts.user_id",
