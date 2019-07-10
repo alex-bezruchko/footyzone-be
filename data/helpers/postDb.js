@@ -67,7 +67,8 @@ function getById(post_id) {
     .from("posts")
     .where("posts.id", post_id)
     .innerJoin("users", "users.id", "=", "posts.user_id")
-    .innerJoin("categories", "categories.id", "=", "posts.category_id");
+    .innerJoin("categories", "categories.id", "=", "posts.category_id")
+    .first();
 }
 
 async function insert(post) {
