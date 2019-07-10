@@ -50,13 +50,24 @@ function fetchAllCategories() {
 
 function getByCategoryId(id) {
   return db("posts").where({ category_id: id });
-  // .then()
 }
 
-function getById(id) {
-  return db("posts")
-    .where({ id })
-    .first();
+function getById(post_id) {
+  return db
+    .select(
+      "posts.title",
+      "posts.summary",
+      "posts.body",
+      "posts.postMainImg",
+      "posts.user_id",
+      "posts.category_id",
+      "users.username",
+      "categories.category_name"
+    )
+    .from("posts")
+    .where("posts.id", post_id)
+    .innerJoin("users", "users.id", "=", "posts.user_id")
+    .innerJoin("categories", "categories.id", "=", "posts.category_id");
 }
 
 async function insert(post) {
