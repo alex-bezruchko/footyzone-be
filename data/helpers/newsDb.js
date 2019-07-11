@@ -46,7 +46,7 @@ function fetchUsersNews(id) {
 }
 
 function fetchAllSubCategories() {
-  return db("categories");
+  return db("subcategories");
 }
 
 function getBySubCategoryId(id) {
