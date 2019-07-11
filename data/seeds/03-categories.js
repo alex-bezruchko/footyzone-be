@@ -1,7 +1,9 @@
 exports.seed = function(knex, Promise) {
   return knex("categories").insert([
-    { category_name: "Champions League" }, // 1
-    { category_name: "Premier League" }, // 2
-    { category_name: "La Liga" },
+    {
+      category_name: "news",
+    },
+    { category_name: "videos" },
+    { category_name: "blog" },
   ]);
 };

@@ -1,5 +1,5 @@
 const express = require("express");
-const postDb = require("./../data/helpers/postDb.js");
+const newsDb = require("./../data/helpers/newsDb.js");
 const multer = require("multer");
 const fs = require("fs");
 const cloudinary = require("cloudinary");
@@ -7,7 +7,7 @@ const router = express.Router();
 const dataUri = require("datauri");
 const path = require("path");
 const newUri = new dataUri();
-const restricted = require("./../auth/restricted.js");
+const restricted = require("../auth/restricted.js");
 
 router.use(express.json());
 // Multer Storage
@@ -43,13 +43,13 @@ cloudinary.config({
 });
 
 router.get("/welcome", async (req, res) => {
-  const posts = await postDb.welcomePosts();
+  const news = await newsDb.welcomeNews();
 
   try {
-    if (posts) {
-      res.status(200).json(posts);
+    if (news) {
+      res.status(200).json(news);
     } else {
-      res.status(404).json("There are no available posts.");
+      res.status(404).json("There are no available news.");
     }
   } catch (e) {
     res.status(500).json(e);
@@ -57,13 +57,12 @@ router.get("/welcome", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const posts = await postDb.fetchAll();
-
+  const news = await newsDb.fetchAll();
   try {
-    if (posts) {
-      res.status(200).json(posts);
+    if (news) {
+      res.status(200).json(news);
     } else {
-      res.status(404).json("There are no available posts.");
+      res.status(404).json("There are no available news.");
     }
   } catch (e) {
     res.status(500).json(e);
@@ -71,13 +70,13 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/latest", async (req, res) => {
-  const posts = await postDb.latest();
+  const news = await newsDb.latest();
 
   try {
-    if (posts) {
-      res.status(200).json(posts);
+    if (news) {
+      res.status(200).json(news);
     } else {
-      res.status(404).json("There are no available posts.");
+      res.status(404).json("There are no available news.");
     }
   } catch (e) {
     res.status(500).json(e);
@@ -85,7 +84,7 @@ router.get("/latest", async (req, res) => {
 });
 
 router.get("/categories", async (req, res) => {
-  const categories = await postDb.fetchAllCategories();
+  const categories = await newsDb.fetchAllCategories();
 
   try {
     if (categories) {
@@ -102,9 +101,9 @@ router.get("/category/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const posts = await postDb.getByCategoryId(id);
-    if (posts.length > 0) {
-      res.status(200).json(posts);
+    const news = await newsDb.getByCategoryId(id);
+    if (news.length > 0) {
+      res.status(200).json(news);
     } else {
       res.status(404).json("Category is invalid.");
     }
@@ -115,15 +114,13 @@ router.get("/category/:id", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   try {
-    const post = await postDb.getById(id);
-    console.log(post);
-    if (post) {
-      console.log(post);
-      res.status(200).json(post);
+    const news = await newsDb.getById(id);
+    if (news) {
+      console.log(news);
+      res.status(200).json(news);
     } else {
-      res.status(404).json("Post id is unavailable.");
+      res.status(404).json("News id is unavailable.");
     }
   } catch (e) {
     console.log(e);
@@ -131,9 +128,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", upload.single("postMainImg"), restricted, (req, res) => {
-  const newPost = req.body;
-  console.log(req.file);
+router.post("/", upload.single("newsMainImg"), restricted, (req, res) => {
+  const newNews = req.body;
   const imageUri = req =>
     newUri.format(
       path.extname(req.file.originalname).toString(),
@@ -144,17 +140,17 @@ router.post("/", upload.single("postMainImg"), restricted, (req, res) => {
 
   cloudinary.uploader.upload(file, result => {
     if (result) {
-      newPost.postMainImg = result.secure_url;
+      newNews.newsMainImg = result.secure_url;
     } else {
-      newPost.postMainImg = "";
+      newNews.newsMainImg = "";
     }
-    postDb
-      .insert(newPost)
-      .then(addedPost => {
-        if (addedPost) {
+    newsDb
+      .insert(newNews)
+      .then(addedNews => {
+        if (addedNews) {
           res
             .status(201)
-            .json({ addedPost, message: "Post was successfully added." });
+            .json({ addedNews, message: "News was successfully added." });
         } else {
           res.status(404).json("Please enter title and body.");
         }
@@ -166,9 +162,9 @@ router.post("/", upload.single("postMainImg"), restricted, (req, res) => {
   });
 });
 
-router.put("/:id", restricted, upload.single("postMainImg"), (req, res) => {
+router.put("/:id", restricted, upload.single("newsMainImg"), (req, res) => {
   const id = req.params.id;
-  const updatedPost = req.body;
+  const updatedNews = req.body;
 
   const imageUri = req =>
     newUri.format(
@@ -179,13 +175,13 @@ router.put("/:id", restricted, upload.single("postMainImg"), (req, res) => {
   const file = imageUri(req).content;
 
   cloudinary.uploader.upload(file, result => {
-    updatedPost.postMainImg = result.secure_url;
+    updatedNews.newsMainImg = result.secure_url;
 
-    postDb
-      .update(id, updatedPost)
-      .then(post => {
-        if (post) {
-          res.status(201).json({ post, message: "Post was updated." });
+    newsDb
+      .update(id, updatedNews)
+      .then(news => {
+        if (news) {
+          res.status(201).json({ news, message: "News was updated." });
         } else {
           res.status(404).json("Please enter title and body.");
         }
@@ -200,12 +196,12 @@ router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const deleted = await postDb.remove(id);
+    const deleted = await newsDb.remove(id);
 
     if (deleted) {
-      res.status(200).json("Post successfully deleted.");
+      res.status(200).json("News successfully deleted.");
     } else {
-      req.status(400).json("Post id is unavailable.");
+      req.status(400).json("News id is unavailable.");
     }
   } catch (e) {
     res.status(500).json(e);
