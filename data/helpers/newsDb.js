@@ -4,8 +4,8 @@ module.exports = {
   welcomeNews,
   latestNews,
   fetchAll,
-  fetchAllCategories,
-  getByCategoryId,
+  fetchAllSubCategories,
+  getBySubCategoryId,
   getById,
   insert,
   update,
@@ -45,12 +45,12 @@ function fetchUsersNews(id) {
   return db("news").where({ user_id: id });
 }
 
-function fetchAllCategories() {
+function fetchAllSubCategories() {
   return db("categories");
 }
 
-function getByCategoryId(id) {
-  return db("news").where({ category_id: id });
+function getBySubCategoryId(id) {
+  return db("news").where({ subcat_id: id });
 }
 
 function getById(news_id) {
@@ -62,14 +62,14 @@ function getById(news_id) {
       "news.body",
       "news.newsMainImg",
       "news.user_id",
-      "news.category_id",
+      "news.subcat_id",
       "users.username",
-      "categories.category_name"
+      "subcategories.subcat_name"
     )
     .from("news")
     .where("news.id", news_id)
     .innerJoin("users", "users.id", "=", "news.user_id")
-    .innerJoin("categories", "categories.id", "=", "news.category_id")
+    .innerJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
     .first();
 }
 
