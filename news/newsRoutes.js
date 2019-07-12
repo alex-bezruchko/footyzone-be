@@ -97,6 +97,20 @@ router.get("/categories", async (req, res) => {
   }
 });
 
+router.get("/subcategories", async (req, res) => {
+  const subcategories = await newsDb.fetchAllSubCategories();
+
+  try {
+    if (subcategories) {
+      res.status(200).json(subcategories);
+    } else {
+      res.status(404).json("There are no available subcategories.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 router.get("/:subcat_slug", async (req, res) => {
   // console.log(req.params.subcat_slug);
   let subcat_slug = req.params.subcat_slug;
