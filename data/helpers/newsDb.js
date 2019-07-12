@@ -55,6 +55,7 @@ function getBySubCategoryId(subcat_id) {
       "news.title",
       "news.summary",
       "news.body",
+      "news.subcat_id",
       "news.newsMainImg",
       "news.user_id",
       "users.username",
