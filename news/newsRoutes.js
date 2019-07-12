@@ -121,7 +121,7 @@ router.get("/:subcat_slug", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:subcat_slug/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const news = await newsDb.getById(id);
