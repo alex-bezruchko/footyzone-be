@@ -4,6 +4,7 @@ module.exports = {
   welcomeNews,
   latestNews,
   fetchAll,
+  fetchAllCategories,
   fetchAllSubCategories,
   getBySubCategoryId,
   getById,
@@ -46,7 +47,9 @@ function fetchAll() {
 function fetchUsersNews(id) {
   return db("news").where({ user_id: id });
 }
-
+function fetchAllCategories() {
+  return db("categories");
+}
 function fetchAllSubCategories() {
   return db("subcategories");
 }

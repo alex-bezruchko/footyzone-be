@@ -84,7 +84,7 @@ router.get("/latest", async (req, res) => {
 });
 
 router.get("/categories", async (req, res) => {
-  const categories = await newsDb.fetchAllSubCategories();
+  const categories = await newsDb.fetchAllCategories();
 
   try {
     if (categories) {
