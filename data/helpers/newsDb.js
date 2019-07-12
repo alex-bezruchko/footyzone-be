@@ -27,6 +27,7 @@ function latestNews() {
 function fetchAll() {
   return db
     .select(
+      "news.id",
       "news.title",
       "news.summary",
       "news.body",
@@ -52,6 +53,7 @@ function fetchAllSubCategories() {
 function getBySubCategoryId(subcat_id) {
   return db
     .select(
+      "news.id",
       "news.title",
       "news.summary",
       "news.body",
@@ -70,6 +72,7 @@ function getBySubCategoryId(subcat_id) {
 function getById(news_id) {
   return db
     .select(
+      "news.id",
       "news.title",
       "news.summary",
       "news.published",
