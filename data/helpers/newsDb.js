@@ -81,7 +81,7 @@ function getById(news_id) {
       "news.user_id",
       "news.subcat_id",
       "users.username",
-      "subcategories.slug"
+      "subcategories.subcat_slug"
     )
     .from("news")
     .where("news.id", news_id)
