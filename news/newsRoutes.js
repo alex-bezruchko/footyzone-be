@@ -70,7 +70,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/latest", async (req, res) => {
-  const news = await newsDb.latest();
+  const news = await newsDb.latestNews();
 
   try {
     if (news) {
@@ -84,7 +84,7 @@ router.get("/latest", async (req, res) => {
 });
 
 router.get("/categories", async (req, res) => {
-  const categories = await newsDb.fetchAllCategories();
+  const categories = await newsDb.fetchAllSubCategories();
 
   try {
     if (categories) {
@@ -97,15 +97,24 @@ router.get("/categories", async (req, res) => {
   }
 });
 
-router.get("/category/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/:subcat_slug", async (req, res) => {
+  // console.log(req.params.subcat_slug);
+  let subcat_slug = req.params.subcat_slug;
 
   try {
-    const news = await newsDb.getByCategoryId(id);
-    if (news.length > 0) {
-      res.status(200).json(news);
-    } else {
-      res.status(404).json("Category is invalid.");
+    const allSubcats = await newsDb.fetchAllSubCategories();
+    // console.log(allSubcats);
+    let subcat_id = allSubcats.filter(
+      subcat => subcat.subcat_slug === subcat_slug
+    );
+    console.log(subcat_id[0].id);
+    if (subcat_id[0].id) {
+      const news = await newsDb.getBySubCategoryId(subcat_id[0].id);
+      if (news.length > 0) {
+        res.status(200).json(news);
+      } else {
+        res.status(404).json("Category doesn't exist.");
+      }
     }
   } catch (e) {
     res.status(500).json(e);
@@ -117,7 +126,6 @@ router.get("/:id", async (req, res) => {
   try {
     const news = await newsDb.getById(id);
     if (news) {
-      console.log(news);
       res.status(200).json(news);
     } else {
       res.status(404).json("News id is unavailable.");

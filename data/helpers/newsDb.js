@@ -49,8 +49,21 @@ function fetchAllSubCategories() {
   return db("subcategories");
 }
 
-function getBySubCategoryId(id) {
-  return db("news").where({ subcat_id: id });
+function getBySubCategoryId(subcat_id) {
+  return db
+    .select(
+      "news.title",
+      "news.summary",
+      "news.body",
+      "news.newsMainImg",
+      "news.user_id",
+      "users.username",
+      "subcategories.subcat_name"
+    )
+    .from("news")
+    .where({ subcat_id: subcat_id })
+    .leftJoin("users", "users.id", "=", "news.user_id")
+    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
 
 function getById(news_id) {
