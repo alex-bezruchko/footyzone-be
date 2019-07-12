@@ -35,7 +35,8 @@ function fetchAll() {
       "news.user_id",
       "news.subcat_id",
       "users.username",
-      "subcategories.subcat_name"
+      "subcategories.subcat_name",
+      "subcategories.subcat_slug"
     )
     .from("news")
     .leftJoin("users", "users.id", "=", "news.user_id")
@@ -61,7 +62,8 @@ function getBySubCategoryId(subcat_id) {
       "news.newsMainImg",
       "news.user_id",
       "users.username",
-      "subcategories.subcat_name"
+      "subcategories.subcat_name",
+      "subcategories.subcat_slug"
     )
     .from("news")
     .where({ subcat_id: subcat_id })
