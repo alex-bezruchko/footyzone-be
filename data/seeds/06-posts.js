@@ -1,5 +1,5 @@
 exports.seed = function(knex, Promise) {
-  return knex("news").insert([
+  return knex("posts").insert([
     {
       user_id: 1,
       published: new Date(),
