@@ -10,6 +10,7 @@ server.use(express.json(), logger("dev"), cors(), helmet());
 server.use("/static", express.static(path.join(__dirname, "uploads")));
 
 const newsRoutes = require("./news/newsRoutes");
+const postsRoutes = require("./posts/postsRoutes");
 const userRoutes = require("./users/userRoutes");
 const authRoutes = require("./auth/authRouter");
 
@@ -18,6 +19,7 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/news/", newsRoutes);
+server.use("/api/posts/", postsRoutes);
 server.use("/api/users/", userRoutes);
 server.use("/auth/", authRoutes);
 
