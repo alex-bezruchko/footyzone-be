@@ -3,27 +3,32 @@ exports.seed = function(knex, Promise) {
     {
       user_id: 1,
       published: new Date(),
-      title:
-        "I wish thee ring hd never come to me. I wish none of this had happened.",
+      title: "Oxlade Chambo is pulling up trees in Liverpool",
       body:
         "Everton have reppportedly entered the bidding for Bournemouth and England star Callum Wilson. Marco Silva is intent on adding a reliable goalscorer this summer and appears to have centred on Wilson.",
       subcat_id: 3,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1558386556/p1vyr5cz4rjxt1wg0xaw.jpg",
     },
     {
       user_id: 1,
       published: new Date(),
-      title: "I think we should get off the road. Get off the road! Quick!",
+      title: "Higuain stranded in between clubs. What it to do, babyy!",
       body:
         "De Ligt is yet to clarify his future but appears to have his sights set on Juventus after revealing the club are interested and a desire to play alongside some of their defenders.",
       subcat_id: 1,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1557622396/pgdh0su9alyjnzfe4lqk.jpg",
     },
     {
       user_id: 1,
       published: new Date(),
-      title: "Our business is our own.",
+      title: "New EPL teams still not sure how to spent their dough.",
       body:
         "Solskjaer is planning for the future at Old Trafford after being confirmed as the clubs full-time manager, and knows he will have a substantial budget to buy new playerss",
       subcat_id: 2,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1557622282/cvjqcyl6yhnv9humfish.jpg",
     },
     {
       user_id: 1,
@@ -32,12 +37,16 @@ exports.seed = function(knex, Promise) {
       body:
         "Declan Rice is one of the bright new stars in Gareth Southgate`s England set-up. JAMIE REDKNAPP caught up with the West Ham United midfielder at Forman`s, a restaurant close to the London Stadium, just seven days after his England debut to talk about his remarkable rise. James Restall listened in.",
       subcat_id: 1,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1557621610/kjc37ba8dxfirkfpxles.jpg",
     },
     {
       user_id: 2,
       title: "I ain't been droppin' no eaves, sir! Promise!",
       published: new Date(),
       subcat_id: 2,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1557620438/rqwa3oh9z2cjrwzn36jt.jpg",
     }, // 5
 
     {

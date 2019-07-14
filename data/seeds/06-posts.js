@@ -7,6 +7,8 @@ exports.seed = function(knex, Promise) {
       body:
         "Everton have reppportedly entered the bidding for Bournemouth and England star Callum Wilson. Marco Silva is intent on adding a reliable goalscorer this summer and appears to have centred on Wilson. Everton have reppportedly entered the bidding for Bournemouth and England star Callum Wilson. Marco Silva is intent on adding a reliable goalscorer this summer and appears to have centred on Wilson. De Ligt is yet to clarify his future but appears to have his sights set on Juventus after revealing the club are interested and a desire to play alongside some of their defenders. De Ligt is yet to clarify his future but appears to have his sights set on Juventus after revealing the club are interested and a desire to play alongside some of their defenders.",
       subcat_id: 1,
+      postMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1554590052/azdgztcyaeicbyzzvc6w.jpg",
     },
     {
       user_id: 1,
@@ -15,6 +17,8 @@ exports.seed = function(knex, Promise) {
       body:
         "De Ligt is yet to clarify his future but appears to have his sights set on Juventus after revealing the club are interested and a desire to play alongside some of their defenders. Marco Silva is intent on adding a reliable goalscorer this summer and appears to have centred on Wilson. De Ligt is yet to clarify his future but appears to have his sights set on Juventus after revealing the club are interested and a desire to play alongside some of their defenders.",
       subcat_id: 1,
+      postMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1554586846/dteq3pfo34traszn2q7s.jpg",
     },
     {
       user_id: 2,
@@ -23,6 +27,8 @@ exports.seed = function(knex, Promise) {
       body:
         "Solskjaer is planning for the future at Old Trafford after being confirmed as the clubs full-time manager, and knows he will have a substantial budget to buy new playerss. Declan Rice is one of the bright new stars in Gareth Southgate`s England set-up. JAMIE REDKNAPP caught up with the West Ham United midfielder at Forman`s, a restaurant close to the London Stadium, just seven days after his England debut to talk about his remarkable rise. ",
       subcat_id: 2,
+      postMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1554583929/s8rjteapt38umxpfqkjp.jpg",
     },
     {
       user_id: 1,
@@ -31,6 +37,8 @@ exports.seed = function(knex, Promise) {
       body:
         "Declan Rice is one of the bright new stars in Gareth Southgate`s England set-up. JAMIE REDKNAPP caught up with the West Ham United midfielder at Forman`s, a restaurant close to the London Stadium, just seven days after his England debut to talk about his remarkable rise. James Restall listened in.",
       subcat_id: 1,
+      postMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1553980808/lpefx9cwbhnymgkstdqk.jpg",
     },
     {
       user_id: 2,
