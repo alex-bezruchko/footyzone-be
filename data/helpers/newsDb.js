@@ -16,9 +16,25 @@ module.exports = {
 };
 
 function welcomeNews() {
-  return db("news")
+  return db
+    .select(
+      "news.id",
+      "news.title",
+      "news.summary",
+      "news.body",
+      "news.newsMainImg",
+      "news.user_id",
+      "news.subcat_id",
+      "users.username",
+      "subcategories.subcat_name",
+      "subcategories.subcat_slug"
+    )
+    .from("news")
+    .leftJoin("users", "users.id", "=", "news.user_id")
+    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
+
     .limit(5)
-    .orderBy("id");
+    .orderBy("news.id");
 }
 
 function latestNews() {
