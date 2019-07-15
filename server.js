@@ -19,7 +19,7 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/news/", newsRoutes);
-server.use("/api/posts/", postsRoutes);
+server.use("/api/blog/", postsRoutes);
 server.use("/api/users/", userRoutes);
 server.use("/auth/", authRoutes);
 
