@@ -3,7 +3,8 @@ exports.seed = function(knex, Promise) {
     {
       category_name: "news",
     },
-    { category_name: "videos" },
     { category_name: "blog" },
+    { category_name: "videos" },
+    { category_name: "old-school" },
   ]);
 };

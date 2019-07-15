@@ -24,12 +24,8 @@ function fetchAll() {
       "posts.body",
       "posts.postMainImg",
       "posts.user_id",
-      "posts.subcat_id",
-      "users.username",
-      "subcategories.subcat_name",
-      "subcategories.subcat_slug"
+      "users.username"
     )
     .from("posts")
-    .leftJoin("users", "users.id", "=", "posts.user_id")
-    .leftJoin("subcategories", "subcategories.id", "=", "posts.subcat_id");
+    .leftJoin("users", "users.id", "=", "posts.user_id");
 }

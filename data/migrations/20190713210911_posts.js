@@ -12,11 +12,6 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .references("id")
       .inTable("users");
-    posts
-      .integer("subcat_id")
-      .unsigned()
-      .references("id")
-      .inTable("subcategories");
   });
 };
 

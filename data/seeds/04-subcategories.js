@@ -16,29 +16,35 @@ exports.seed = function(knex, Promise) {
       category_id: 1,
     },
     {
-      subcat_name: "Blog",
-      subcat_slug: "blog",
+      subcat_name: "Goals",
+      subcat_slug: "goals",
       category_id: 2,
     },
     {
-      subcat_name: "Old School",
-      subcat_slug: "old-school",
+      subcat_name: "Highlights",
+      subcat_slug: "highlights",
       category_id: 2,
     },
-    // {
-    //   subcat_name: "Goals",
-    //   subcat_slug: "goals",
-    //   category_id: 2,
-    // },
-    // {
-    //   subcat_name: "Highlights",
-    //   subcat_slug: "highlights",
-    //   category_id: 2,
-    // },
-    // {
-    //   subcat_name: "Interviews",
-    //   subcat_slug: "interviews",
-    //   category_id: 2,
-    // },
+    {
+      subcat_name: "Interviews",
+      subcat_slug: "interviews",
+      category_id: 2,
+    },
+
+    {
+      subcat_name: "Players",
+      subcat_slug: "players",
+      category_id: 3,
+    },
+    {
+      subcat_name: "Teams",
+      subcat_slug: "teams",
+      category_id: 3,
+    },
+    {
+      subcat_name: "Coaches",
+      subcat_slug: "coaches",
+      category_id: 3,
+    },
   ]);
 };
