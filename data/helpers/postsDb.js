@@ -7,7 +7,7 @@ module.exports = {
   //   fetchAllCategories,
   //   fetchAllSubCategories,
   //   getBySubCategoryId,
-  //   getById,
+  fetchById,
   //   insert,
   //   update,
   //   remove,
@@ -28,4 +28,22 @@ function fetchAll() {
     )
     .from("posts")
     .leftJoin("users", "users.id", "=", "posts.user_id");
+}
+
+function fetchById(post_id) {
+  return db
+    .select(
+      "posts.id",
+      "posts.title",
+      "posts.summary",
+      "posts.published",
+      "posts.body",
+      "posts.postMainImg",
+      "posts.user_id",
+      "users.username"
+    )
+    .from("posts")
+    .where("posts.id", post_id)
+    .innerJoin("users", "users.id", "=", "posts.user_id")
+    .first();
 }
