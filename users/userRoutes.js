@@ -1,6 +1,8 @@
 const express = require("express");
 const newsDb = require("../data/helpers/newsDb.js");
 const userDb = require("../data/helpers/userDb.js");
+const multer = require("multer");
+
 const router = express.Router();
 const restricted = require("../auth/restricted.js");
 const cloudinary = require("cloudinary");
