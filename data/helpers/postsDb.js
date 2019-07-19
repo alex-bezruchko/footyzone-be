@@ -24,7 +24,8 @@ function fetchAll() {
       "posts.body",
       "posts.postMainImg",
       "posts.user_id",
-      "users.username"
+      "users.username",
+      "users.avatar"
     )
     .from("posts")
     .leftJoin("users", "users.id", "=", "posts.user_id");
@@ -40,7 +41,8 @@ function fetchById(post_id) {
       "posts.body",
       "posts.postMainImg",
       "posts.user_id",
-      "users.username"
+      "users.username",
+      "users.avatar"
     )
     .from("posts")
     .where("posts.id", post_id)

@@ -26,6 +26,7 @@ function welcomeNews() {
       "news.user_id",
       "news.subcat_id",
       "users.username",
+      "users.avatar",
       "subcategories.subcat_name",
       "subcategories.subcat_slug"
     )
@@ -52,6 +53,7 @@ function fetchAll() {
       "news.user_id",
       "news.subcat_id",
       "users.username",
+      "users.avatar",
       "subcategories.subcat_name",
       "subcategories.subcat_slug"
     )
@@ -81,6 +83,7 @@ function getBySubCategoryId(subcat_id) {
       "news.newsMainImg",
       "news.user_id",
       "users.username",
+      "users.avatar",
       "subcategories.subcat_name",
       "subcategories.subcat_slug"
     )
@@ -102,6 +105,7 @@ function getById(news_id) {
       "news.user_id",
       "news.subcat_id",
       "users.username",
+      "users.avatar",
       "subcategories.subcat_slug"
     )
     .from("news")
