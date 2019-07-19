@@ -32,7 +32,6 @@ const upload = multer({
   },
 });
 
-
 cloudinary.config({
   cloud_name: "htg1iqq1p",
   api_key: "915419188456665",
@@ -122,20 +121,19 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
       });
   });
 
+  // try {
+  //   const updated = await userDb.update(id, updatedUser);
+  //   console.log(updated);
 
-  try {
-    const updated = await userDb.update(id, updatedUser);
-    console.log(updated);
-
-    if (updated) {
-      res.status(201).json("User updated.");
-    } else {
-      res.status(404).json("User id is unavailable.");
-    }
-  } catch (e) {
-    console.log(e);
-    res.status(500).json(e);
-  }
+  //   if (updated) {
+  //     res.status(201).json("User updated.");
+  //   } else {
+  //     res.status(404).json("User id is unavailable.");
+  //   }
+  // } catch (e) {
+  //   console.log(e);
+  //   res.status(500).json(e);
+  // }
 });
 
 router.delete("/:id", async (req, res) => {
