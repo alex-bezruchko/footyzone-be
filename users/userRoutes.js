@@ -72,6 +72,7 @@ router.put("/:id", async (req, res) => {
       res.status(404).json("User id is unavailable.");
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json(e);
   }
 });
