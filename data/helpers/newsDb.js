@@ -34,7 +34,7 @@ function welcomeNews() {
     .leftJoin("users", "users.id", "=", "news.user_id")
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
 
-    .limit(5)
+    .limit(4)
     .orderBy("news.id");
 }
 
