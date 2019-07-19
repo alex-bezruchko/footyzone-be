@@ -93,8 +93,8 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", upload.single("avatar"), (req, res) => {
-  let id = req.params.id;
-  let updatedUser = req.body;
+  const id = req.params.id;
+  const updatedUser = req.body;
   console.log(updatedUser);
   console.log(req.body);
 
@@ -107,13 +107,17 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
   const file = imageUri(req).content;
 
   cloudinary.uploader.upload(file, result => {
-    updatedUser.avatar = result.secure_url;
+    if (result) {
+      updatedUser.avatar = result.secure_url;
+    } else {
+      updatedUser.avatar = "";
+    }
 
     userDb
       .update(id, updatedUser)
-      .then(news => {
-        if (news) {
-          res.status(201).json({ news, message: "User was updated." });
+      .then(user => {
+        if (user) {
+          res.status(201).json({ user, message: "User was updated." });
         } else {
           res.status(404).json("Please enter title and body.");
         }
