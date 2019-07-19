@@ -3,8 +3,41 @@ const newsDb = require("../data/helpers/newsDb.js");
 const userDb = require("../data/helpers/userDb.js");
 const router = express.Router();
 const restricted = require("../auth/restricted.js");
-
+const cloudinary = require("cloudinary");
+const dataUri = require("datauri");
+const path = require("path");
+const newUri = new dataUri();
 router.use(express.json());
+
+const storage = multer.memoryStorage();
+// Multer Filter
+const imageFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only jpeg, jpg, png files are allowed."), false);
+  }
+};
+
+// Multer Upload Config
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+    fileFilter: imageFilter,
+  },
+});
+
+
+cloudinary.config({
+  cloud_name: "htg1iqq1p",
+  api_key: "915419188456665",
+  api_secret: "M7938KD1Akyo8XBTmf7jF68jiHA",
+});
 
 router.use((err, req, res, next) => {
   res.status(500).json({
@@ -58,11 +91,37 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", upload.single("avatar"), (req, res) => {
   let id = req.params.id;
   let updatedUser = req.body;
   console.log(updatedUser);
   console.log(req.body);
+
+  const imageUri = req =>
+    newUri.format(
+      path.extname(req.file.originalname).toString(),
+      req.file.buffer
+    );
+
+  const file = imageUri(req).content;
+
+  cloudinary.uploader.upload(file, result => {
+    updatedUser.avatar = result.secure_url;
+
+    userDb
+      .update(id, updatedUser)
+      .then(news => {
+        if (news) {
+          res.status(201).json({ news, message: "User was updated." });
+        } else {
+          res.status(404).json("Please enter title and body.");
+        }
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  });
+
 
   try {
     const updated = await userDb.update(id, updatedUser);
