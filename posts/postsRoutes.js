@@ -16,6 +16,18 @@ router.get("/", async (req, res) => {
     res.status(500).json(e);
   }
 });
+router.get("/welcome", async (req, res) => {
+  const posts = await postsDb.latestPosts();
+  try {
+    if (posts) {
+      res.status(200).json(posts);
+    } else {
+      res.status(404).json("There are no available posts.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
