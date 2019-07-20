@@ -47,8 +47,8 @@ async function update(id, changes) {
   return db("news")
     .where({ id })
     .update(changes)
-    .then(function() {
-      return getById(id);
+    .then(ids => {
+      return getById(ids[0]);
     });
 }
 

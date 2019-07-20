@@ -113,8 +113,6 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
     console.log(result);
     if (result.secure_url) {
       updatedUser.avatar = result.secure_url;
-    } else {
-      updatedUser.avatar = result.url;
     }
 
     userDb
