@@ -97,7 +97,10 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
   const updatedUser = req.body;
   console.log(updatedUser);
   console.log(req.body);
-
+  let currentUser = userDb.getById(id);
+  updatedUser.user_id = currentUser.user_id;
+  updatedUser.avatar = currentUser.user_id;
+  updatedUser.password = currentUser.password;
   const imageUri = req =>
     newUri.format(
       path.extname(req.file.originalname).toString(),
@@ -111,7 +114,7 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
     if (result.secure_url) {
       updatedUser.avatar = result.secure_url;
     } else {
-      updatedUser.avatar = "";
+      updatedUser.avatar = result.url;
     }
 
     userDb
