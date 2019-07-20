@@ -24,7 +24,6 @@ function latestPosts() {
       "posts.body",
       "posts.postMainImg",
       "posts.user_id",
-      "posts.subcat_id",
       "users.username",
       "users.avatar"
     )
