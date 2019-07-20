@@ -8,7 +8,7 @@ exports.seed = function(knex, Promise) {
       password: bcrypt.hashSync("mersepass", 10),
       role_id: 1,
       avatar:
-        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1563588862/gwdtdxsrz7kj00qywx6t.png",
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1563587602/cb8pdmlwpckftutit7mx.png",
     }, // 1
     {
       username: "Gazza",

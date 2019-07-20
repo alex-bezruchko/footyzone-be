@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1558386556/p1vyr5cz4rjxt1wg0xaw.jpg",
     },
     {
-      user_id: 1,
+      user_id: 2,
       published: new Date(),
       title: "Higuain stranded in between clubs. What it to do, babyy!",
       body:
@@ -21,7 +21,7 @@ exports.seed = function(knex, Promise) {
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1557622396/pgdh0su9alyjnzfe4lqk.jpg",
     },
     {
-      user_id: 1,
+      user_id: 3,
       published: new Date(),
       title: "New EPL teams still not sure how to spent their dough.",
       body:
@@ -50,7 +50,7 @@ exports.seed = function(knex, Promise) {
     }, // 5
 
     {
-      user_id: 2,
+      user_id: 1,
       title: "Of course you are, and I'm coming with you!",
       published: new Date(),
       subcat_id: 2,
@@ -64,7 +64,7 @@ exports.seed = function(knex, Promise) {
         "I made a promise, Mr Frodo. A promise. \"Don't you leave him Samwise Gamgee.\" And I don't mean to. I don't mean to.",
     }, // 7
     {
-      user_id: 2,
+      user_id: 3,
       published: new Date(),
       subcat_id: 2,
       title:

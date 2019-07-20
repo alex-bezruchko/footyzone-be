@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1554590052/azdgztcyaeicbyzzvc6w.jpg",
     },
     {
-      user_id: 1,
+      user_id: 2,
       published: new Date(),
       title: "Player nowadays. What's grinding my gears!",
       body:
@@ -28,7 +28,7 @@ exports.seed = function(knex, Promise) {
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1554583929/s8rjteapt38umxpfqkjp.jpg",
     },
     {
-      user_id: 1,
+      user_id: 3,
       published: new Date(),
       title: "Can you protect me from yourself?",
       body:
@@ -37,19 +37,19 @@ exports.seed = function(knex, Promise) {
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1553980808/lpefx9cwbhnymgkstdqk.jpg",
     },
     {
-      user_id: 2,
+      user_id: 1,
       title: "I ain't been droppin' no eaves, sir! Promise!",
       published: new Date(),
     }, // 5
 
     {
-      user_id: 2,
+      user_id: 3,
       title: "Of course you are, and I'm coming with you!",
       published: new Date(),
     }, // 6
 
     {
-      user_id: 2,
+      user_id: 1,
       published: new Date(),
       title:
         "I made a promise, Mr Frodo. A promise. \"Don't you leave him Samwise Gamgee.\" And I don't mean to. I don't mean to.",
