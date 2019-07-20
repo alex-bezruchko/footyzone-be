@@ -107,7 +107,8 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
   const file = imageUri(req).content;
 
   cloudinary.uploader.upload(file, result => {
-    if (result) {
+    console.log(result);
+    if (result.secure_url) {
       updatedUser.avatar = result.secure_url;
     } else {
       updatedUser.avatar = "";
@@ -123,6 +124,7 @@ router.put("/:id", upload.single("avatar"), (req, res) => {
         }
       })
       .catch(err => {
+        console.log(err);
         res.status(500).json(err);
       });
   });
