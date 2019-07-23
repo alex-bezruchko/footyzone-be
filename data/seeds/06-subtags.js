@@ -18,12 +18,12 @@ exports.seed = function(knex, Promise) {
     {
       subtag_name: "Real Madrid",
       subtag_slug: "real-madrid",
-      tag_id: 2,
+      tag_id: 1,
     },
     {
       subtag_name: "Liverpool",
       subtag_slug: "liverpool",
-      tag_id: 2,
+      tag_id: 1,
     },
     {
       subtag_name: "Dembele",
@@ -44,6 +44,21 @@ exports.seed = function(knex, Promise) {
     {
       subtag_name: "Raheem Sterling",
       subtag_slug: "raheem-sterling",
+      tag_id: 2,
+    },
+    {
+      subtag_name: "PSG",
+      subtag_slug: "psg",
+      tag_id: 1,
+    },
+    {
+      subtag_name: "Bayern Munich",
+      subtag_slug: "bayern-munich",
+      tag_id: 1,
+    },
+    {
+      subtag_name: "Gareth Bale",
+      subtag_slug: "gareth-bale",
       tag_id: 2,
     },
   ]);
