@@ -96,7 +96,12 @@ function getBySubCategoryId(subcat_id) {
 
 function getTagsByNewsId(news_id) {
   return db
-    .select("subtags.subtag_name", "tags.tag_name")
+    .select(
+      "subtags.subtag_name",
+      "tags.tag_name",
+      "tags.tag_slug",
+      "subtags.subtag_slug"
+    )
     .from("subtags")
     .where({ news_id: news_id })
     .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
