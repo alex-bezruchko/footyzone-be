@@ -2,7 +2,7 @@ exports.seed = function(knex, Promise) {
   return knex("tags").insert([
     {
       tag_name: "Teams",
-      tag_slug: "uefacl",
+      tag_slug: "teams",
     },
     {
       tag_name: "Players",
