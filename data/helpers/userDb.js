@@ -36,7 +36,7 @@ async function insert(user) {
 }
 
 function findBy(filter) {
-  return db("users").where(filter);
+  return db("*").where(filter);
 }
 // async function update(id, changes) {
 //   return db("users")
