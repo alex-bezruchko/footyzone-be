@@ -5,6 +5,10 @@ exports.up = function(knex, Promise) {
       .text("tag_name", 255)
       .notNullable()
       .unique();
+    tags
+      .text("tag_slug", 255)
+      .notNullable()
+      .unique();
   });
 };
 

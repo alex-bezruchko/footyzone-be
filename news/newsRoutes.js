@@ -140,6 +140,12 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   try {
     const news = await newsDb.getById(id);
     if (news) {
+      const newsTags = await newsDb.getTagsByNewsId(id);
+      if (newsTags) {
+        news.tags = newsTags;
+      } else {
+        news.tags = [];
+      }
       res.status(200).json(news);
     } else {
       res.status(404).json("News id is unavailable.");

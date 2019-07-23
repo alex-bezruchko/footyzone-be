@@ -13,6 +13,7 @@ module.exports = {
   remove,
   removeByUser,
   fetchUsersNews,
+  getTagsByNewsId,
 };
 
 function welcomeNews() {
@@ -93,6 +94,13 @@ function getBySubCategoryId(subcat_id) {
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
 
+function getTagsByNewsId(news_id) {
+  return db
+    .select("subtags.subtag_name", "subtags.id")
+    .from("subtags")
+    .where({ news_id: news_id })
+    .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id");
+}
 function getById(news_id) {
   return db
     .select(
@@ -106,12 +114,14 @@ function getById(news_id) {
       "news.subcat_id",
       "users.username",
       "users.avatar",
-      "subcategories.subcat_slug"
+      "subcategories.subcat_slug",
+      "subcategories.subcat_name"
     )
     .from("news")
     .where("news.id", news_id)
     .innerJoin("users", "users.id", "=", "news.user_id")
     .innerJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
+
     .first();
 }
 
