@@ -56,8 +56,8 @@ function getPostLikes(post_id) {
   // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
   // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
 }
-function getPostComments(post_id) {
-  return db.from("comments").where({ post_id: post_id });
+function getPostComments(postId) {
+  return db.from("comments").where({ post_id: postId });
   // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
   // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
 }

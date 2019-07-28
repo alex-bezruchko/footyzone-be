@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable("comments", function(news) {
+  return knex.schema.createTable("comments", function(comments) {
     comments.increments();
     comments.text("comment", 5000).notNullable();
     comments
