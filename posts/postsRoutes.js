@@ -34,8 +34,12 @@ router.get("/:id", async (req, res) => {
   try {
     const post = await postsDb.fetchById(id);
     const postComments = await postsDb.getPostComments(id);
-    if (post && postComments) {
+    const postLikes = await postsDb.getPostLikes(id);
+
+    if (post && postComments && postLikes) {
       post.comments = postComments;
+      post.likes = postLikes;
+
       res.status(200).json(post);
     } else {
       res.status(404).json("Post id is unavailable.");

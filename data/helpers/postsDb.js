@@ -8,6 +8,7 @@ module.exports = {
   //   fetchAllSubCategories,
   //   getBySubCategoryId,
   fetchById,
+  getPostLikes,
   getPostComments,
   //   insert,
   //   update,
@@ -50,8 +51,13 @@ function fetchAll() {
     .leftJoin("users", "users.id", "=", "posts.user_id");
 }
 
-function getPostComments(post_id) {
+function getPostLikes(post_id) {
   return db.from("likes").where({ post_id: post_id });
+  // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
+  // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
+}
+function getPostComments(post_id) {
+  return db.from("comments").where({ post_id: post_id });
   // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
   // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
 }
