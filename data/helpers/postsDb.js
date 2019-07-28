@@ -53,13 +53,19 @@ function fetchAll() {
 
 function getPostLikes(post_id) {
   return db.from("likes").where({ post_id: post_id });
-  // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
-  // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
 }
+
 function getPostComments(postId) {
-  return db.from("comments").where({ post_id: postId });
-  // .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
-  // .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
+  return db
+    .select(
+      "comments.user_id",
+      "comments.comment",
+      "users.username",
+      "users.avatar"
+    )
+    .from("comments")
+    .where("comments.post_id", postId)
+    .innerJoin("users", "users.id", "=", "comments.user_id");
 }
 
 function fetchById(post_id) {
