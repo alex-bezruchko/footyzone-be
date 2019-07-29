@@ -66,7 +66,7 @@ exports.seed = function(knex, Promise) {
       subcat_id: 2,
       title: "Lukaku left out of Man Utd's Oslo squad",
       newsMainImg:
-        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407511/t2zgmfsldbsc5a2azgtn.jpg",
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407604/gugu1gi5qbiwcd5fhztx.jpg",
     }, // 7
     {
       user_id: 3,
@@ -75,7 +75,7 @@ exports.seed = function(knex, Promise) {
       title:
         " Arsenal are not at a crossroads according to director Josh Kroenke in a passionate response to an open letter from fans.",
       newsMainImg:
-        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407511/t2zgmfsldbsc5a2azgtn.jpg",
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564408039/uywlfcxswvjqksgoc3xz.jpg",
     }, // 8
     {
       user_id: 3,
