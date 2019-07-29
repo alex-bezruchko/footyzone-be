@@ -95,7 +95,7 @@ function getBySubCategoryId(subcat_id) {
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
 function getLikesByNewsId(news_id) {
-  return db.from("newslikes").where({ news_id: news_id });
+  return db("newslikes").where({ news_id: news_id });
 }
 
 function getTagsByNewsId(news_id) {
