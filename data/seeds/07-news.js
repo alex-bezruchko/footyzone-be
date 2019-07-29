@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
     {
       user_id: 1,
       published: new Date(),
-      title: "Can you protect me from yourself?",
+      title: "Evra retires from football",
       body:
         "Declan Rice is one of the bright new stars in Gareth Southgate`s England set-up. JAMIE REDKNAPP caught up with the West Ham United midfielder at Forman`s, a restaurant close to the London Stadium, just seven days after his England debut to talk about his remarkable rise. James Restall listened in.",
       subcat_id: 1,
@@ -42,7 +42,8 @@ exports.seed = function(knex, Promise) {
     },
     {
       user_id: 2,
-      title: "I ain't been droppin' no eaves, sir! Promise!",
+      title:
+        "Arsenal are in advanced talks to sign Nicolas Pepe, but why have they chosen the Lille winger",
       published: new Date(),
       subcat_id: 2,
       newsMainImg:
@@ -51,37 +52,48 @@ exports.seed = function(knex, Promise) {
 
     {
       user_id: 1,
-      title: "Of course you are, and I'm coming with you!",
+      title:
+        "Harry Maguire did not take part in training with Leicester City on Monday",
       published: new Date(),
-      subcat_id: 2,
+      subcat_id: 3,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407361/sitt4lnumk8fpw52kvge.jpg",
     }, // 6
 
     {
       user_id: 2,
       published: new Date(),
       subcat_id: 2,
-      title:
-        "I made a promise, Mr Frodo. A promise. \"Don't you leave him Samwise Gamgee.\" And I don't mean to. I don't mean to.",
+      title: "Lukaku left out of Man Utd's Oslo squad",
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407511/t2zgmfsldbsc5a2azgtn.jpg",
     }, // 7
     {
       user_id: 3,
       published: new Date(),
-      subcat_id: 2,
+      subcat_id: 3,
       title:
-        " N-nothing important. That is, I heard a great deal about a ring, a Dark Lord, and something about the end of the world, but... Please, Mr. Gandalf, sir, don't hurt me. Don't turn me into anything... unnatural.",
+        " Arsenal are not at a crossroads according to director Josh Kroenke in a passionate response to an open letter from fans.",
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407511/t2zgmfsldbsc5a2azgtn.jpg",
     }, // 8
     {
       user_id: 3,
       title: "Well, that rules you out, Pip.",
       published: new Date(),
-      subcat_id: 2,
+      subcat_id: 3,
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407511/t2zgmfsldbsc5a2azgtn.jpg",
     }, // 9
 
     {
       user_id: 4,
       title: "We've had one yes. What about second breakfast?",
       published: new Date(),
-      subcat_id: 2,
+      subcat_id: 3,
+
+      newsMainImg:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564407647/gt71e9hs5evexnfceykf.jpg",
     }, // 10
 
     {
