@@ -2,6 +2,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable("comments", function(comments) {
     comments.increments();
     comments.text("comment", 5000).notNullable();
+    comments.text("date", 5000).notNullable();
     comments
       .integer("user_id")
       .unsigned()

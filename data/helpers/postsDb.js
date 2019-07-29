@@ -60,6 +60,7 @@ function getPostComments(postId) {
     .select(
       "comments.user_id",
       "comments.comment",
+      "comments.date",
       "users.username",
       "users.avatar"
     )
