@@ -46,33 +46,26 @@ function latestNews() {
 }
 
 function fetchAll() {
-  return (
-    db
-      .select(
-        "news.id",
-        "news.title",
-        "news.summary",
-        "news.body",
-        "news.newsMainImg",
-        "news.user_id",
-        "news.subcat_id",
-        "users.username",
-        "users.avatar",
-        "subcategories.subcat_name",
-        "subcategories.subcat_slug"
-        // "newslikes.news_id"
-      )
-      .from("news")
-      // .leftJoin("newslikes", "newslikes.news_id", "=", "news.id")
-
-      // .join("newslikes", "news.id", "=", "newslikes.news_id")
-      .leftJoin("users", "users.id", "=", "news.user_id")
-      .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
-  );
+  return db
+    .select(
+      "news.id",
+      "news.title",
+      "news.summary",
+      "news.body",
+      "news.newsMainImg",
+      "news.user_id",
+      "news.subcat_id",
+      "users.username",
+      "users.avatar",
+      "subcategories.subcat_name",
+      "subcategories.subcat_slug"
+    )
+    .from("news")
+    .leftJoin("users", "users.id", "=", "news.user_id")
+    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
 function fetchAllLikes() {
   return db("newslikes");
-  // .leftJoin("newslikes", "newslikes.news_id", "=", "news.id");
 }
 function fetchUsersNews(id) {
   return db("news").where({ user_id: id });
