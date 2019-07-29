@@ -57,9 +57,18 @@ router.get("/welcome", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const news = await newsDb.fetchAll();
   try {
+    let news = await newsDb.fetchAll();
+    let likes = await newsDb.fetchAllLikes();
     if (news) {
+      for (let i = 0; i < news.length; i++) {
+        news[i].likes = [];
+        for (let j = 0; j < likes.length; j++) {
+          if (Number(news[i].id) === Number(likes[j].news_id)) {
+            news[i].likes.push(likes[j]);
+          }
+        }
+      }
       res.status(200).json(news);
     } else {
       res.status(404).json("There are no available news.");
