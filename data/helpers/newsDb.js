@@ -14,6 +14,7 @@ module.exports = {
   removeByUser,
   fetchUsersNews,
   getTagsByNewsId,
+  getLikesByNewsId,
 };
 
 function welcomeNews() {
@@ -92,6 +93,9 @@ function getBySubCategoryId(subcat_id) {
     .where({ subcat_id: subcat_id })
     .leftJoin("users", "users.id", "=", "news.user_id")
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
+}
+function getLikesByNewsId(news_id) {
+  return db.from("newslikes").where({ news_id: news_id });
 }
 
 function getTagsByNewsId(news_id) {

@@ -141,6 +141,12 @@ router.get("/:subcat_slug/:id", async (req, res) => {
     const news = await newsDb.getById(id);
     if (news) {
       const newsTags = await newsDb.getTagsByNewsId(id);
+      const newsLikes = await newsDb.getLikesByNewsId(id);
+      if (newsLikes) {
+        news.likes = newsLikes;
+      } else {
+        news.likes = [];
+      }
       if (newsTags) {
         news.tags = newsTags;
       } else {
