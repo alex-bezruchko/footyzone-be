@@ -9,6 +9,22 @@ exports.seed = function(knex, Promise) {
       post_id: 2,
     },
     {
+      user_id: 6,
+      post_id: 2,
+    },
+    {
+      user_id: 6,
+      post_id: 1,
+    },
+    {
+      user_id: 7,
+      post_id: 1,
+    },
+    {
+      user_id: 5,
+      post_id: 1,
+    },
+    {
       user_id: 1,
       post_id: 3,
     },
@@ -47,6 +63,22 @@ exports.seed = function(knex, Promise) {
     {
       user_id: 1,
       post_id: 6,
+    },
+    {
+      user_id: 7,
+      post_id: 6,
+    },
+    {
+      user_id: 6,
+      post_id: 3,
+    },
+    {
+      user_id: 4,
+      post_id: 3,
+    },
+    {
+      user_id: 4,
+      post_id: 2,
     },
   ]);
 };
