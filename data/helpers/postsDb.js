@@ -10,13 +10,30 @@ module.exports = {
   fetchById,
   getPostLikes,
   getPostComments,
-  //   insert,
+  insertComments,
+  getCommentById,
   //   update,
   //   remove,
   //   removeByUser,
   //   fetchUsersNews,
 };
 
+function insertComments(comment) {
+  return db("comments")
+    .insert(comment, "id")
+    .then(res => {
+      return getPostComments(comment.post_id);
+    });
+  // .then(ids => {
+  //   return getCommentById(ids[0]);
+  // });
+}
+
+function getCommentById(comment_id) {
+  return db("comments")
+    .where({ id: comment_id })
+    .first();
+}
 function latestPosts() {
   return db
     .select(

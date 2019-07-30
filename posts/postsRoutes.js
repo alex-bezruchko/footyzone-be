@@ -16,6 +16,21 @@ router.get("/", async (req, res) => {
     res.status(500).json(e);
   }
 });
+router.post("/:id/comments", async (req, res) => {
+  const comment = req.body;
+  console.log(req.body);
+  const posts = await postsDb.insertComments(comment);
+  console.log(posts);
+  try {
+    if (posts) {
+      res.status(200).json(posts);
+    } else {
+      res.status(404).json("Unable to save comment to this post.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 router.get("/welcome", async (req, res) => {
   const posts = await postsDb.latestPosts();
   try {
