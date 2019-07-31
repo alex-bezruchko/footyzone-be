@@ -19,11 +19,14 @@ router.get("/", async (req, res) => {
 router.post("/comments", async (req, res) => {
   const comment = req.body;
   console.log(req.body);
-  const posts = await postsDb.insertComments(comment);
-  console.log(posts);
+  const post = await postsDb.insertComments(comment);
+  const postComments = await postsDb.getPostComments(id);
+  const postLikes = await postsDb.getPostLikes(id);
   try {
-    if (posts) {
-      res.status(200).json(posts);
+    if (post && postComments && postLikes) {
+      post.comments = postComments;
+      post.likes = postLikes;
+      res.status(200).json(post);
     } else {
       res.status(404).json("Unable to save comment to this post.");
     }
