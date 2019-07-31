@@ -22,7 +22,7 @@ function insertComments(comment) {
   return db("comments")
     .insert(comment, "id")
     .then(res => {
-      return getPostComments(comment.post_id);
+      return fetchById(comment.post_id);
     });
   // .then(ids => {
   //   return getCommentById(ids[0]);
