@@ -20,8 +20,8 @@ router.post("/comments", async (req, res) => {
   const comment = req.body;
   console.log(req.body);
   const post = await postsDb.insertComments(comment);
-  const postComments = await postsDb.getPostComments(id);
-  const postLikes = await postsDb.getPostLikes(id);
+  const postComments = await postsDb.getPostComments(comment.post_id);
+  const postLikes = await postsDb.getPostLikes(comment.post_id);
   try {
     if (post && postComments && postLikes) {
       post.comments = postComments;
