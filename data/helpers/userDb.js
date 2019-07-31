@@ -44,7 +44,7 @@ function findBy(filter) {
 //     .update(changes);
 // }
 async function update(id, changes) {
-  return db("news")
+  return db("users")
     .where({ id })
     .update(changes)
     .then(ids => {
