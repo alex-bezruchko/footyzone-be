@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(e);
   }
 });
-router.post("/:id/comments", async (req, res) => {
+router.post("/comments", async (req, res) => {
   const comment = req.body;
   console.log(req.body);
   const posts = await postsDb.insertComments(comment);

@@ -6,8 +6,8 @@ const path = require("path");
 
 const helmet = require("helmet");
 
-server.use(cors());
 server.use(express.json(), logger("dev"), helmet());
+server.use(cors());
 server.use("/static", express.static(path.join(__dirname, "uploads")));
 
 const newsRoutes = require("./news/newsRoutes");
