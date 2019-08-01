@@ -83,6 +83,7 @@ function getPostComments(postId) {
       "comments.user_id",
       "comments.comment",
       "comments.date",
+      "comments.id",
       "users.username",
       "users.avatar"
     )
