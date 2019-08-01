@@ -29,10 +29,13 @@ function insertComments(comment) {
   //   return getCommentById(ids[0]);
   // });
 }
-function deleteCommentById(comment_id) {
+function deleteCommentById(comment_id, post_id) {
   return db("comments")
     .where("id", comment_id)
-    .del();
+    .del()
+    .then(res => {
+      return getPostComments(post_id);
+    });
 }
 function getCommentById(comment_id) {
   return db("comments")
