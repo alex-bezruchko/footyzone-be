@@ -15,7 +15,17 @@ router.post("/register", (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      res.status(500).json(error);
+      if (error.code === "23505") {
+        res.status(500).json({ error, message: "User already exists" });
+      } else {
+        res
+          .status(500)
+          .json({
+            error,
+            message:
+              "We had a problem processing your request. Please check all the fields",
+          });
+      }
     });
 });
 
