@@ -8,6 +8,10 @@ router.post("/register", (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
+  if (user.avatar === undefined || user.avatar.length === 0) {
+    user.avatar =
+      "https://res.cloudinary.com/htg1iqq1p/image/upload/v1564598526/fwwckvx64nj7tjzxiyne.png";
+  }
   users
     .insert(user)
     .then(saved => {
