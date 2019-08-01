@@ -34,6 +34,23 @@ router.post("/comments", async (req, res) => {
     res.status(500).json(e);
   }
 });
+
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const deleted = await postsDb.deleteCommentById(id);
+
+    if (deleted) {
+      res.status(200).json("Comment was successfully deleted.");
+    } else {
+      req.status(400).json("Comment id is unavailable.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 router.get("/welcome", async (req, res) => {
   const posts = await postsDb.latestPosts();
   try {

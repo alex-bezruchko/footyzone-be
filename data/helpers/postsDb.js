@@ -12,6 +12,7 @@ module.exports = {
   getPostComments,
   insertComments,
   getCommentById,
+  deleteCommentById,
   //   update,
   //   remove,
   //   removeByUser,
@@ -28,7 +29,11 @@ function insertComments(comment) {
   //   return getCommentById(ids[0]);
   // });
 }
-
+function deleteCommentById(comment_id) {
+  return db("comments")
+    .where("id", comment_id)
+    .del();
+}
 function getCommentById(comment_id) {
   return db("comments")
     .where({ id: comment_id })
