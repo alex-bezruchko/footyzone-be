@@ -43,7 +43,9 @@ router.delete("/:post_id/comments/:id", async (req, res) => {
     const deleted = await postsDb.deleteCommentById(id, post_id);
 
     if (deleted) {
-      res.status(200).json("Comment was successfully deleted.");
+      res
+        .status(200)
+        .json({ deleted, message: "Comment was successfully deleted." });
     } else {
       req.status(404).json("Comment id is unavailable.");
     }
