@@ -11,20 +11,18 @@ router.post("/register", (req, res) => {
   users
     .insert(user)
     .then(saved => {
+      console.log(saved);
       res.status(201).json(saved);
     })
     .catch(error => {
-      console.log(error);
       if (error.code === "23505") {
         res.status(500).json({ error, message: "User already exists" });
       } else {
-        res
-          .status(500)
-          .json({
-            error,
-            message:
-              "We had a problem processing your request. Please check all the fields",
-          });
+        res.status(500).json({
+          error,
+          message:
+            "We had a problem processing your request. Please check all the fields",
+        });
       }
     });
 });
