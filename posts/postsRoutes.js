@@ -1,8 +1,45 @@
 const express = require("express");
 const postsDb = require("./../data/helpers/postsDb.js");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const dataUri = require("datauri");
+const path = require("path");
+const newUri = new dataUri();
+const restricted = require("../auth/restricted.js");
 
 const router = express.Router();
 router.use(express.json());
+
+const storage = multer.memoryStorage();
+// Multer Filter
+const imageFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only jpeg, jpg, png files are allowed."), false);
+  }
+};
+
+// Multer Upload Config
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+    fileFilter: imageFilter,
+  },
+});
+
+// Cloudinary Config
+
+cloudinary.config({
+  cloud_name: "htg1iqq1p",
+  api_key: "915419188456665",
+  api_secret: "M7938KD1Akyo8XBTmf7jF68jiHA",
+});
 
 router.get("/", async (req, res) => {
   const news = await postsDb.fetchAll();
@@ -16,9 +53,44 @@ router.get("/", async (req, res) => {
     res.status(500).json(e);
   }
 });
+
+router.post("/", upload.single("postMainImg"), restricted, (req, res) => {
+  const newPost = req.body;
+  const imageUri = req =>
+    newUri.format(
+      path.extname(req.file.originalname).toString(),
+      req.file.buffer
+    );
+
+  const file = imageUri(req).content;
+
+  cloudinary.uploader.upload(file, result => {
+    if (result) {
+      newPost.postMainImg = result.secure_url;
+    } else {
+      newPost.postMainImg = "";
+    }
+    newsDb
+      .insert(newPost)
+      .then(addedPost => {
+        if (addedPost) {
+          res
+            .status(201)
+            .json({ addedPost, message: "News was successfully added." });
+        } else {
+          res.status(404).json("Please enter title and body.");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        console.log(res);
+        res.status(500).json(err);
+      });
+  });
+});
+
 router.post("/comments", async (req, res) => {
   const comment = req.body;
-  console.log(req.body);
   const post = await postsDb.insertComments(comment);
   const postComments = await postsDb.getPostComments(comment.post_id);
   const postLikes = await postsDb.getPostLikes(comment.post_id);
