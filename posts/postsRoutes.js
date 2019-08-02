@@ -54,39 +54,41 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", upload.single("postMainImg"), restricted, (req, res) => {
+// upload.single("postMainImg")
+router.post("/", restricted, (req, res) => {
   const newPost = req.body;
-  const imageUri = req =>
-    newUri.format(
-      path.extname(req.file.originalname).toString(),
-      req.file.buffer
-    );
 
-  const file = imageUri(req).content;
+  // const imageUri = req =>
+  //   newUri.format(
+  //     path.extname(req.file.originalname).toString(),
+  //     req.file.buffer
+  //   );
 
-  cloudinary.uploader.upload(file, result => {
-    if (result) {
-      newPost.postMainImg = result.secure_url;
-    } else {
-      newPost.postMainImg = "";
-    }
-    newsDb
-      .insert(newPost)
-      .then(addedPost => {
-        if (addedPost) {
-          res
-            .status(201)
-            .json({ addedPost, message: "News was successfully added." });
-        } else {
-          res.status(404).json("Please enter title and body.");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        console.log(res);
-        res.status(500).json(err);
-      });
-  });
+  // const file = imageUri(req).content;
+
+  // cloudinary.uploader.upload(file, result => {
+  //   if (result) {
+  //     newPost.postMainImg = result.secure_url;
+  //   } else {
+  //     newPost.postMainImg = "";
+  //   }
+  newsDb
+    .insert(newPost)
+    .then(addedPost => {
+      if (addedPost) {
+        res
+          .status(201)
+          .json({ addedPost, message: "News was successfully added." });
+      } else {
+        res.status(404).json("Please enter title and body.");
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      console.log(res);
+      res.status(500).json(err);
+    });
+  // });
 });
 
 router.post("/comments", async (req, res) => {
