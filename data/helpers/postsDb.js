@@ -31,7 +31,9 @@ function insertComments(comment) {
   // });
 }
 function fetchUsersPosts(id) {
-  return db("posts").where({ user_id: id });
+  return db("posts")
+    .where({ user_id: id })
+    .limit(5);
 }
 function deleteCommentById(comment_id, post_id) {
   return db("comments")
