@@ -72,6 +72,7 @@ router.get("/:id/posts", async (req, res) => {
       res.status(404).json(`Users are not available.`);
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json(e);
   }
 });
