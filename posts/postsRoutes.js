@@ -72,7 +72,7 @@ router.post("/", restricted, (req, res) => {
   //   } else {
   //     newPost.postMainImg = "";
   //   }
-  newsDb
+  postsDb
     .insert(newPost)
     .then(addedPost => {
       if (addedPost) {
