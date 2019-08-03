@@ -13,6 +13,7 @@ module.exports = {
   insertComments,
   getCommentById,
   deleteCommentById,
+  insert,
   //   update,
   //   remove,
   //   removeByUser,
@@ -93,6 +94,13 @@ function getPostComments(postId) {
     .from("comments")
     .where("comments.post_id", postId)
     .innerJoin("users", "users.id", "=", "comments.user_id");
+}
+async function insert(posts) {
+  return db("posts")
+    .insert(posts, "id")
+    .then(ids => {
+      return fetchById(ids[0]);
+    });
 }
 
 function fetchById(post_id) {
