@@ -1,5 +1,7 @@
 const express = require("express");
 const newsDb = require("../data/helpers/newsDb.js");
+const postsDb = require("../data/helpers/postsDb.js");
+
 const userDb = require("../data/helpers/userDb.js");
 const multer = require("multer");
 
@@ -64,7 +66,7 @@ router.get("/", restricted, async (req, res) => {
 router.get("/:id/posts", async (req, res) => {
   const id = req.params.id;
   try {
-    const usersPosts = await newsDb.fetchUsersPosts(id);
+    const usersPosts = await postsDb.fetchUsersPosts(id);
 
     if (usersPosts) {
       res.status(200).json(usersPosts);
