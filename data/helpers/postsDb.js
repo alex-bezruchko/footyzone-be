@@ -17,7 +17,7 @@ module.exports = {
   //   update,
   //   remove,
   //   removeByUser,
-  //   fetchUsersNews,
+  fetchUsersPosts,
 };
 
 function insertComments(comment) {
@@ -29,6 +29,9 @@ function insertComments(comment) {
   // .then(ids => {
   //   return getCommentById(ids[0]);
   // });
+}
+function fetchUsersPosts(id) {
+  return db("posts").where({ user_id: id });
 }
 function deleteCommentById(comment_id, post_id) {
   return db("comments")
