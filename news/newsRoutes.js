@@ -122,7 +122,7 @@ router.get("/subcategories", async (req, res) => {
 
 router.get("/subtags", async (req, res) => {
   try {
-    const allSubcats = await newsDb.fetchAllgitTags();
+    const allSubcats = await newsDb.fetchAllTags();
 
     if (allSubcats) {
       res.status(200).json(allSubcats);
