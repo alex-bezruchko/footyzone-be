@@ -62,7 +62,8 @@ function fetchAll() {
     )
     .from("news")
     .leftJoin("users", "users.id", "=", "news.user_id")
-    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
+    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
+    .orderBy("news.id", "desc");
 }
 function fetchAllLikes() {
   return db("newslikes");
