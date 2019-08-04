@@ -16,6 +16,7 @@ module.exports = {
   getTagsByNewsId,
   getLikesByNewsId,
   fetchAllLikes,
+  fetchAllTags,
 };
 
 function welcomeNews() {
@@ -78,6 +79,9 @@ function fetchAllSubCategories() {
   return db("subcategories");
 }
 
+function fetchAllTags() {
+  return db("subtags");
+}
 function getBySubCategoryId(subcat_id) {
   return db
     .select(

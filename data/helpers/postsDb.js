@@ -4,7 +4,6 @@ module.exports = {
   //   welcome,
   latestPosts,
   fetchAll,
-  //   fetchAllCategories,
   //   fetchAllSubCategories,
   //   getBySubCategoryId,
   fetchById,

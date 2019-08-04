@@ -120,6 +120,20 @@ router.get("/subcategories", async (req, res) => {
   }
 });
 
+router.get("/subtags", async (req, res) => {
+  try {
+    const allSubcats = await newsDb.fetchAllTags();
+
+    if (allSubcats) {
+      res.status(200).json(allSubcats);
+    } else {
+      res.status(404).json("Subcategories do not exist.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 router.get("/:subcat_slug", async (req, res) => {
   // console.log(req.params.subcat_slug);
   let subcat_slug = req.params.subcat_slug;
