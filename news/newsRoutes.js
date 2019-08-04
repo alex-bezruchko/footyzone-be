@@ -130,6 +130,7 @@ router.get("/subtags", async (req, res) => {
       res.status(404).json("Subcategories do not exist.");
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json(e);
   }
 });
