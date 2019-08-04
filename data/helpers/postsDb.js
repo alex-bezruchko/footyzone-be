@@ -80,7 +80,8 @@ function fetchAll() {
       "users.avatar"
     )
     .from("posts")
-    .leftJoin("users", "users.id", "=", "posts.user_id");
+    .leftJoin("users", "users.id", "=", "posts.user_id")
+    .orderBy("posts.id", "desc");
 }
 
 function getPostLikes(post_id) {
