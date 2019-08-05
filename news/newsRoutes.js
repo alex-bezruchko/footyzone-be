@@ -225,7 +225,7 @@ router.post("/", restricted, (req, res) => {
   };
   if (tags && tags.length > 0) {
     for (let t = 0; t < tags.length; t++) {
-      newsDb.insertTags(tags[i]);
+      newsDb.insertTags(tags[t]);
     }
   }
   // const imageUri = req =>
