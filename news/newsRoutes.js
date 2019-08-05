@@ -257,7 +257,7 @@ router.post("/", restricted, async (req, res) => {
         });
         let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
         if (tagsAdded) {
-          addedNews.tags = finnishedTag;
+          addedNews.tags = finnishedTags;
         } else {
           addedNews.tags = [];
         }
