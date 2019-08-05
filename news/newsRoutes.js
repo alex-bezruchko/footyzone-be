@@ -232,7 +232,7 @@ router.post("/", restricted, async (req, res) => {
       for (let t = 0; t < tags.length; t++) {
         for (let c = 0; c < currentTags.length; c++) {
           if (tags[t].subcat_name !== currentTags[c].subcat_name) {
-            newsDb.insertTags(tags[t]);
+            await newsDb.insertTags(tags[t]);
             newTags.push(tags);
           }
         }
@@ -241,6 +241,7 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
     if (addedNews) {
       if (newTags) {
+        let finnishedTags = [];
         // new
         newTags.map(newTag => {
           console.log("mapped newTag:");
@@ -249,16 +250,17 @@ router.post("/", restricted, async (req, res) => {
           finnishedTag.subcat_name = newTag.subcat_name;
           finnishedTag.subcat_slug = newTag.subcat_slug;
           finnishedTag.tag_id = newTag.tag_id;
-
+          finnishedTags.push(finnishedTags);
           // newTag.news_id = addedNews.id;
-          newsDb.insertNewsTags(finnishedTag);
         });
+        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
+        if (tagsAdded) {
+          addedNews.tags = finnishedTag;
+        } else {
+          addedNews.tags = [];
+        }
         console.log("addedNews after mapping:");
         console.log(addedNews);
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
-      } else {
         res
           .status(201)
           .json({ addedNews, message: "News was successfully added." });
