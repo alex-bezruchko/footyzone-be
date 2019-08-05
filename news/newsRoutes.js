@@ -213,7 +213,7 @@ router.post("/", restricted, (req, res) => {
     newsMainImg,
     tags,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   let newNews = {
     user_id: user_id,
     title: title,
@@ -224,6 +224,8 @@ router.post("/", restricted, (req, res) => {
     summary: summary,
   };
   let currentTags = newsDb.fetchAllTags();
+  console.log("currentTags:");
+  console.log(currentTags);
   let newTags = [];
   if (tags && tags.length > 0) {
     for (let t = 0; t < tags.length; t++) {
@@ -256,9 +258,13 @@ router.post("/", restricted, (req, res) => {
         if (newTags) {
           // new
           newTags.map(newTag => {
+            console.log("mapped newTag:");
+            console.log(newTag);
             newTag.news_id = addedNews.id;
             newsDb.insertNewsTags(newTag);
           });
+          console.log("addedNews after mapping:");
+          console.log(addedNews);
           res
             .status(201)
             .json({ addedNews, message: "News was successfully added." });
