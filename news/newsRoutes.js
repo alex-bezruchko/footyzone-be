@@ -204,6 +204,7 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 
 router.post("/", restricted, (req, res) => {
   const newNews = req.body;
+  console.log(req.body);
   // const imageUri = req =>
   //   newUri.format(
   //     path.extname(req.file.originalname).toString(),
