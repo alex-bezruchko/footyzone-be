@@ -260,8 +260,13 @@ router.post("/", restricted, (req, res) => {
           newTags.map(newTag => {
             console.log("mapped newTag:");
             console.log(newTag);
-            newTag.news_id = addedNews.id;
-            newsDb.insertNewsTags(newTag);
+            let finnishedTag = {};
+            finnishedTag.subcat_name = newTag.subcat_name;
+            finnishedTag.subcat_slug = newTag.subcat_slug;
+            finnishedTag.tag_id = newTag.tag_id;
+
+            // newTag.news_id = addedNews.id;
+            newsDb.insertNewsTags(finnishedTag);
           });
           console.log("addedNews after mapping:");
           console.log(addedNews);
