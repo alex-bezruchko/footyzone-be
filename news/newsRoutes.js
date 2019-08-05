@@ -120,6 +120,22 @@ router.get("/subcategories", async (req, res) => {
   }
 });
 
+router.get("/:id/subtags", async (req, res) => {
+  let id = this.props.match.params.id;
+  try {
+    const allSubcats = await newsDb.fetch();
+
+    if (allSubcats) {
+      res.status(200).json(allSubcats);
+    } else {
+      res.status(404).json("Subcategories do not exist.");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
+});
+
 router.get("/subtags", async (req, res) => {
   try {
     const allSubcats = await newsDb.fetchAllTags();
@@ -186,38 +202,38 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
-router.post("/", upload.single("newsMainImg"), restricted, (req, res) => {
+router.post("/", restricted, (req, res) => {
   const newNews = req.body;
-  const imageUri = req =>
-    newUri.format(
-      path.extname(req.file.originalname).toString(),
-      req.file.buffer
-    );
+  // const imageUri = req =>
+  //   newUri.format(
+  //     path.extname(req.file.originalname).toString(),
+  //     req.file.buffer
+  //   );
 
-  const file = imageUri(req).content;
+  // const file = imageUri(req).content;
 
-  cloudinary.uploader.upload(file, result => {
-    if (result) {
-      newNews.newsMainImg = result.secure_url;
-    } else {
-      newNews.newsMainImg = "";
-    }
-    newsDb
-      .insert(newNews)
-      .then(addedNews => {
-        if (addedNews) {
-          res
-            .status(201)
-            .json({ addedNews, message: "News was successfully added." });
-        } else {
-          res.status(404).json("Please enter title and body.");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+  // cloudinary.uploader.upload(file, result => {
+  //   if (result) {
+  //     newNews.newsMainImg = result.secure_url;
+  //   } else {
+  //     newNews.newsMainImg = "";
+  //   }
+  newsDb
+    .insert(newNews)
+    .then(addedNews => {
+      if (addedNews) {
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
+      } else {
+        res.status(404).json("Please enter title and body.");
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  // });
 });
 
 router.put("/:id", restricted, upload.single("newsMainImg"), (req, res) => {
