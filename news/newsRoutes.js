@@ -207,7 +207,7 @@ router.post("/", restricted, (req, res) => {
     user_id,
     title,
     body,
-    news_id,
+    // news_id,
     summary,
     published,
     newsMainImg,
@@ -218,14 +218,21 @@ router.post("/", restricted, (req, res) => {
     user_id: user_id,
     title: title,
     body: body,
-    news_id: news_id,
+    // news_id: news_id,
     published: published,
     newsMainImg: newsMainImg,
     summary: summary,
   };
+  let currentTags = newsDb.fetchAllTags();
+  let newTags = [];
   if (tags && tags.length > 0) {
     for (let t = 0; t < tags.length; t++) {
-      newsDb.insertTags(tags[t]);
+      for (let c = 0; c < currentTags.length; c++) {
+        if (tags[t].subcat_name !== currentTags[c].subcat_name) {
+          newsDb.insertTags(tags[t]);
+          newTags.push(tags);
+        }
+      }
     }
   }
   // const imageUri = req =>
@@ -246,6 +253,13 @@ router.post("/", restricted, (req, res) => {
     .insert(newNews)
     .then(addedNews => {
       if (addedNews) {
+        if (newTags) {
+          // new
+          newTags.map(newTag => {
+            newTag.news_id = addedNews.id;
+            newsDb.insertNewsTags(newTag);
+          });
+        }
         res
           .status(201)
           .json({ addedNews, message: "News was successfully added." });
