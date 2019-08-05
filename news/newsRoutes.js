@@ -202,12 +202,12 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
-router.post("/", restricted, (req, res) => {
+router.post("/", restricted, async (req, res) => {
   const {
     user_id,
     title,
     body,
-    // news_id,
+    subcat_id,
     summary,
     published,
     newsMainImg,
@@ -215,28 +215,62 @@ router.post("/", restricted, (req, res) => {
   } = req.body;
   // console.log(req.body);
   let newNews = {
-    user_id: user_id,
     title: title,
-    body: body,
-    // news_id: news_id,
     published: published,
-    newsMainImg: newsMainImg,
     summary: summary,
+    body: body,
+    newsMainImg: newsMainImg,
+    user_id: user_id,
+    subcat_id: subcat_id,
   };
-  let currentTags = newsDb.fetchAllTags();
-  console.log("currentTags:");
-  console.log(currentTags);
   let newTags = [];
-  if (tags && tags.length > 0) {
-    for (let t = 0; t < tags.length; t++) {
-      for (let c = 0; c < currentTags.length; c++) {
-        if (tags[t].subcat_name !== currentTags[c].subcat_name) {
-          newsDb.insertTags(tags[t]);
-          newTags.push(tags);
+  try {
+    let currentTags = await newsDb.fetchAllTags();
+    console.log("currentTags:");
+    console.log(currentTags);
+    if (tags && tags.length > 0) {
+      for (let t = 0; t < tags.length; t++) {
+        for (let c = 0; c < currentTags.length; c++) {
+          if (tags[t].subcat_name !== currentTags[c].subcat_name) {
+            newsDb.insertTags(tags[t]);
+            newTags.push(tags);
+          }
         }
       }
     }
+    let addedNews = await newsDb.insert(newNews);
+    if (addedNews) {
+      if (newTags) {
+        // new
+        newTags.map(newTag => {
+          console.log("mapped newTag:");
+          console.log(newTag);
+          let finnishedTag = {};
+          finnishedTag.subcat_name = newTag.subcat_name;
+          finnishedTag.subcat_slug = newTag.subcat_slug;
+          finnishedTag.tag_id = newTag.tag_id;
+
+          // newTag.news_id = addedNews.id;
+          newsDb.insertNewsTags(finnishedTag);
+        });
+        console.log("addedNews after mapping:");
+        console.log(addedNews);
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
+      } else {
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
+      }
+    } else {
+      res.status(404).json("Please enter title and body.");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
   }
+
   // const imageUri = req =>
   //   newUri.format(
   //     path.extname(req.file.originalname).toString(),
@@ -251,41 +285,15 @@ router.post("/", restricted, (req, res) => {
   //   } else {
   //     newNews.newsMainImg = "";
   //   }
-  newsDb
-    .insert(newNews)
-    .then(addedNews => {
-      if (addedNews) {
-        if (newTags) {
-          // new
-          newTags.map(newTag => {
-            console.log("mapped newTag:");
-            console.log(newTag);
-            let finnishedTag = {};
-            finnishedTag.subcat_name = newTag.subcat_name;
-            finnishedTag.subcat_slug = newTag.subcat_slug;
-            finnishedTag.tag_id = newTag.tag_id;
+  // newsDb
+  //   .insert(newNews)
+  //   .then(addedNews => {
 
-            // newTag.news_id = addedNews.id;
-            newsDb.insertNewsTags(finnishedTag);
-          });
-          console.log("addedNews after mapping:");
-          console.log(addedNews);
-          res
-            .status(201)
-            .json({ addedNews, message: "News was successfully added." });
-        } else {
-          res
-            .status(201)
-            .json({ addedNews, message: "News was successfully added." });
-        }
-      } else {
-        res.status(404).json("Please enter title and body.");
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   });
   // });
 });
 
