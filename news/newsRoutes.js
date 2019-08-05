@@ -213,7 +213,7 @@ router.post("/", restricted, async (req, res) => {
     newsMainImg,
     tags,
   } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
   let newNews = {
     title: title,
     published: published,
