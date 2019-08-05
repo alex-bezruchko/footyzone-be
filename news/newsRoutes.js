@@ -261,8 +261,6 @@ router.post("/", restricted, async (req, res) => {
 
         if (tagsAdded) {
           addedNews.tags = finnishedTags;
-        } else {
-          addedNews.tags = [];
         }
         console.log("addedNews after mapping:");
         console.log(addedNews);
