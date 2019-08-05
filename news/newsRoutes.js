@@ -259,10 +259,14 @@ router.post("/", restricted, (req, res) => {
             newTag.news_id = addedNews.id;
             newsDb.insertNewsTags(newTag);
           });
+          res
+            .status(201)
+            .json({ addedNews, message: "News was successfully added." });
+        } else {
+          res
+            .status(201)
+            .json({ addedNews, message: "News was successfully added." });
         }
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
       } else {
         res.status(404).json("Please enter title and body.");
       }
