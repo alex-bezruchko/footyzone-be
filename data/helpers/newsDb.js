@@ -17,6 +17,7 @@ module.exports = {
   getLikesByNewsId,
   fetchAllLikes,
   fetchAllTags,
+  insertTags,
 };
 
 function welcomeNews() {
@@ -148,6 +149,14 @@ async function insert(news) {
     .insert(news, "id")
     .then(ids => {
       return getById(ids[0]);
+    });
+}
+
+async function insertTags(subtags) {
+  return db("subtags")
+    .insert(subtags, "id")
+    .then(ids => {
+      return db("subtags");
     });
 }
 

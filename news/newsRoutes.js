@@ -203,8 +203,31 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 });
 
 router.post("/", restricted, (req, res) => {
-  const newNews = req.body;
+  const {
+    user_id,
+    title,
+    body,
+    news_id,
+    summary,
+    published,
+    newsMainImg,
+    tags,
+  } = req.body;
   console.log(req.body);
+  let newNews = {
+    user_id: user_id,
+    title: title,
+    body: body,
+    news_id: news_id,
+    published: published,
+    newsMainImg: newsMainImg,
+    summary: summary,
+  };
+  if (tags && tags.length > 0) {
+    for (let t = 0; t < tags.length; t++) {
+      newsDb.insertTags(tags[i]);
+    }
+  }
   // const imageUri = req =>
   //   newUri.format(
   //     path.extname(req.file.originalname).toString(),
