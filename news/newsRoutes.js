@@ -252,7 +252,7 @@ router.post("/", restricted, async (req, res) => {
           finnishedTag.subcat_name = newTag.subcat_name;
           finnishedTag.subcat_slug = newTag.subcat_slug;
           finnishedTag.tag_id = newTag.tag_id;
-          finnishedTags.push(finnishedTags);
+          finnishedTags.push(finnishedTag);
           // newTag.news_id = addedNews.id;
         });
         let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
