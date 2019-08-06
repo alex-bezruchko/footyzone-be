@@ -202,6 +202,29 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
+// Post Tags
+
+router.post("/subtags", async (req, res) => {
+  let tags = req.body;
+  try {
+    let newTags = [];
+    tags.map(tag => {
+      let insertedTag = await newsDb.insertNewsTags(tag);
+      newTags.push(insertedTag)
+    })
+    console.log(newTags)
+    if (newTags && newTags.length > 0) {
+      res.status(201).json({newTags, message: "Tags added successfully"})
+    } else {
+      res.status(404).json({message: "Error processing the request"})
+    }
+
+    // let insertedTags = 
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({e, message: 'Server error'})
+  }
+});
 router.post("/", restricted, async (req, res) => {
   const {
     user_id,
@@ -225,30 +248,8 @@ router.post("/", restricted, async (req, res) => {
   };
   let newTags = [];
   try {
-    let currentTags = await newsDb.fetchAllTags();
+    // let currentTags = await newsDb.fetchAllTags();
 
-    for (let t = 0; t < tags.length; t++) {
-      // console.log("Submitted tag: ");
-      // console.log(tags[t]);
-      for (let c = 0; c < currentTags.length; c++) {
-        // console.log("Current tag: ");
-        // console.log(tags[c]);
-        if (tags[t].subcat_name !== currentTags[c].subcat_name) {
-          tags[t].tag_id = subcat_id;
-          let joe = await newsDb.insertTags(tags[t]);
-          // console.log("joe");
-          console.log(joe);
-          // console.log("tags");
-          // console.log(tags);
-          if (joe) {
-            newTags.push(joe);
-          }
-          // console.log("newTags");
-          // console.log(newTags);
-        }
-      }
-      // }
-    }
     let addedNews = await newsDb.insert(newNews);
 
     if (addedNews) {

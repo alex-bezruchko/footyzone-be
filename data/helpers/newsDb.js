@@ -27,9 +27,9 @@ module.exports = {
 
 function insertNewsTags(tagNews) {
   return db("subtagnews").insert(tagNews, "id");
-  // .then(ids => {
-  //   return getById(ids[0]);
-  // });
+  .then(ids => {
+    return getById(ids[0]);
+  });
 }
 
 function welcomeNews() {
