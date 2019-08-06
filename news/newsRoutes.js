@@ -210,14 +210,17 @@ router.post("/subtags", async (req, res) => {
     let newSubtags = [];
     if (subtags.length > 0) {
       for (let t = 0; t < subtags.length; i++) {
+        // let tag = subtags[i]
         let insertedTag = await newsDb.insertNewsSubtag(subtags[t]);
         newSubtags.push(insertedTag);
       }
-    }
-    if (newSubtags && newSubtags.length > 0) {
-      res.status(201).json({ newSubtags, message: "Tags added successfully" });
-    } else {
-      res.status(404).json({ message: "Error processing the request" });
+      if (newSubtags && newSubtags.length > 0) {
+        res
+          .status(201)
+          .json({ newSubtags, message: "Tags added successfully" });
+      } else {
+        res.status(404).json({ message: "Error processing the request" });
+      }
     }
 
     // let insertedTags =
