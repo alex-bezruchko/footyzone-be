@@ -245,7 +245,7 @@ router.post("/", restricted, async (req, res) => {
       if (newTags) {
         let finnishedTags = [];
         // new
-        newTags.map(newTag => {
+        finnishedTags = newTags.map(newTag => {
           // console.log("mapped newTag:");
           // console.log(newTag);
           let finnishedTag = {};
