@@ -206,6 +206,7 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 
 router.post("/subtags", async (req, res) => {
   let subtags = req.body;
+  console.log(req.body);
   try {
     let newSubtags = [];
     if (subtags.length > 0) {
@@ -219,6 +220,7 @@ router.post("/subtags", async (req, res) => {
           .status(201)
           .json({ newSubtags, message: "Tags added successfully" });
       } else {
+        // console.log(me)
         res.status(404).json({ message: "Error processing the request" });
       }
     }
