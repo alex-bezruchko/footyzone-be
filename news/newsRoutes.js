@@ -274,12 +274,12 @@ router.post("/", restricted, async (req, res) => {
         // if (tagsAdded) {
         // }
         // console.log("addedNews after mapping:");
-        addedNews.tags = [];
-        addedNews.tags = req.body.tags;
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
       }
+      addedNews.tags = [];
+      addedNews.tags = req.body.tags;
+      res
+        .status(201)
+        .json({ addedNews, message: "News was successfully added." });
       // }
     } else {
       console.log(addedNews);
