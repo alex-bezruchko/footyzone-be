@@ -280,17 +280,19 @@ router.post("/", restricted, async (req, res) => {
         console.log(tagsAdded);
         // console.log(tags);
         // if (tagsAdded) {
-        addedNews.tags = req.body.tags;
         // }
         // console.log("addedNews after mapping:");
-        console.log(addedNews);
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
-      } else {
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
+        if (addedNews) {
+          addedNews.tags = [];
+          addedNews.tags = req.body.tags;
+          res
+            .status(201)
+            .json({ addedNews, message: "News was successfully added." });
+        } else {
+          res
+            .status(201)
+            .json({ addedNews, message: "News was successfully added." });
+        }
       }
     }
   } catch (e) {
