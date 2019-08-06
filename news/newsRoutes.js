@@ -242,7 +242,9 @@ router.post("/", restricted, async (req, res) => {
           // console.log(joe);
           // console.log("tags");
           // console.log(tags);
-          newTags.push(joe);
+          if (joe) {
+            newTags.push(joe);
+          }
           // console.log("newTags");
           // console.log(newTags);
         }

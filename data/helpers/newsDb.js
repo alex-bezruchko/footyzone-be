@@ -168,7 +168,7 @@ async function insertTags(subtags) {
   return db("subtags")
     .insert(subtags, "id")
     .then(ids => {
-      return db("subtags");
+      // return db("subtags");
     });
 }
 
