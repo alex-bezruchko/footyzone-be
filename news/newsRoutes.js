@@ -236,6 +236,7 @@ router.post("/", restricted, async (req, res) => {
         }
       }
     }
+    console.log(newTags);
     let addedNews = await newsDb.insert(newNews);
     // console.log(addedNews);
     if (addedNews) {
@@ -243,17 +244,14 @@ router.post("/", restricted, async (req, res) => {
       if (newTags) {
         let finnishedTags = [];
         // new
-        newTags.map(newTag => {
-          console.log("mapped newTag:");
-          console.log(newTag);
+        for (let i = 0; i < newTags.length; i++) {
           let finnishedTag = {};
           finnishedTag.subcat_name = newTag.subcat_name;
           finnishedTag.subcat_slug = newTag.subcat_slug;
           finnishedTag.tag_id = newTag.tag_id;
           console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
-          // newTag.news_id = addedNews.id;
-        });
+        }
 
         console.log("finnishedTags:");
         console.log(finnishedTags);
@@ -263,7 +261,7 @@ router.post("/", restricted, async (req, res) => {
         console.log(tagsAdded);
 
         // if (tagsAdded) {
-        addedNews.tags = finnishedTags;
+        addedNews.tags = tags;
         // }
         // console.log("addedNews after mapping:");
         // console.log(addedNews);
