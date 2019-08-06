@@ -127,13 +127,13 @@ function getLikesByNewsId(news_id) {
 function getTagsByNewsId(news_id) {
   return db
     .select(
+      "tagnews.news_id",
+      "tagnews.tag_id",
       "tags.tag_name",
       "tags.tag_slug",
-      "news.news_id",
-      "tagnews.news_id",
-      "tagnews.tag_id"
+      "news.news_id"
     )
-    .from("news")
+    .from("tagnews")
     .where({ news_id: news_id })
     .leftJoin("tagnews", "news.id", "=", "tagnews.news_id")
     .leftJoin("tags", "tags.id", "=", "tagnews.tag_id");
