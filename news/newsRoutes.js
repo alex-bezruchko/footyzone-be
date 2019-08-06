@@ -243,7 +243,7 @@ router.post("/", restricted, async (req, res) => {
       if (newTags) {
         let finnishedTags = [];
         // new
-        finnishedTags = newTags.map(newTag => {
+        newTags.map(newTag => {
           // console.log("mapped newTag:");
           // console.log(newTag);
           let finnishedTag = {};
