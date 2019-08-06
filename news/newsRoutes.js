@@ -226,7 +226,7 @@ router.post("/", restricted, async (req, res) => {
   let newTags = [];
   try {
     let currentTags = await newsDb.fetchAllTags();
-    if (tags && tags.length > 0) {
+    if (tags && tags.length > 0 && currentTags) {
       for (let t = 0; t < tags.length; t++) {
         for (let c = 0; c < currentTags.length; c++) {
           if (tags[t].subcat_name !== currentTags[c].subcat_name) {
