@@ -13,7 +13,7 @@ module.exports = {
   remove,
   removeByUser,
   fetchUsersNews,
-  // getTagsByNewsId,
+  getTagsByNewsId,
   getLikesByNewsId,
   fetchAllLikes,
   fetchAllTags,
@@ -124,18 +124,20 @@ function getLikesByNewsId(news_id) {
   return db("newslikes").where({ news_id: news_id });
 }
 
-// function getTagsByNewsId(news_id) {
-//   return db
-//     .select(
-//       "tags.tag_name",
-//       "tags.tag_slug",
-//       "news.news_id"
-//     )
-//     .from("tags")
-//     .where({ news_id: news_id })
-//     .leftJoin("news", "news.id", "=", "tags.user_id")
-
-// }
+function getTagsByNewsId(news_id) {
+  return db
+    .select(
+      "tags.tag_name",
+      "tags.tag_slug",
+      "news.news_id",
+      "tagnews.news_id",
+      "tagnews.tag_id"
+    )
+    .from("news")
+    .where({ news_id: news_id })
+    .leftJoin("tagnews", "news.id", "=", "tagnews.news_id")
+    .leftJoin("tags", "tags.id", "=", "tagnews.tag_id");
+}
 function getById(news_id) {
   return db
     .select(
