@@ -213,7 +213,7 @@ router.post("/", restricted, async (req, res) => {
     newsMainImg,
     tags,
   } = req.body;
-  // console.log(req.body);
+  console.log(req.body.tags);
   let newNews = {
     title: title,
     published: published,
@@ -239,7 +239,7 @@ router.post("/", restricted, async (req, res) => {
         if (tags[t].subcat_name !== currentTags[c].subcat_name) {
           let joe = await newsDb.insertTags(tags[t]);
           // console.log("joe");
-          // console.log(joe);
+          console.log(joe);
           // console.log("tags");
           // console.log(tags);
           if (joe) {
@@ -280,7 +280,7 @@ router.post("/", restricted, async (req, res) => {
         console.log(tagsAdded);
         // console.log(tags);
         // if (tagsAdded) {
-        addedNews.tags = tags;
+        addedNews.tags = req.body.tags;
         // }
         // console.log("addedNews after mapping:");
         console.log(addedNews);
