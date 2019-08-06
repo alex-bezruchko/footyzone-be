@@ -13,7 +13,7 @@ module.exports = {
   remove,
   removeByUser,
   fetchUsersNews,
-  getTagsByNewsId,
+  // getTagsByNewsId,
   getLikesByNewsId,
   fetchAllLikes,
   fetchAllTags,
