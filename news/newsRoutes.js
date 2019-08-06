@@ -243,38 +243,40 @@ router.post("/", restricted, async (req, res) => {
     // console.log(addedNews);
     // if (addedNews) {
     console.log(addedNews);
-    if (newTags) {
-      // console.log(newTags);
-      let finnishedTags = [];
-      // new
-      for (let i = 0; i < newTags.length; i++) {
-        let finnishedTag = {};
-        finnishedTag.subcat_name = newTag.subcat_name;
-        finnishedTag.subcat_slug = newTag.subcat_slug;
-        finnishedTag.tag_id = newTag.tag_id;
-        console.log(finnishedTag);
-        finnishedTags.push(finnishedTag);
+    if (addedNews) {
+      if (newTags.length > 0) {
+        // console.log(newTags);
+        let finnishedTags = [];
+        // new
+        for (let i = 0; i < newTags.length; i++) {
+          let finnishedTag = {};
+          finnishedTag.subcat_name = newTag.subcat_name;
+          finnishedTag.subcat_slug = newTag.subcat_slug;
+          finnishedTag.tag_id = newTag.tag_id;
+          console.log(finnishedTag);
+          finnishedTags.push(finnishedTag);
+        }
+
+        // console.log("finnishedTags:");
+        // console.log(finnishedTags);
+
+        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
+        // console.log("tagsAdded:");
+        // console.log(tagsAdded);
+        console.log(tags);
+        // if (tagsAdded) {
+        addedNews.tags = tags;
+        // }
+        // console.log("addedNews after mapping:");
+        console.log(addedNews);
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
+      } else {
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
       }
-
-      // console.log("finnishedTags:");
-      // console.log(finnishedTags);
-
-      let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
-      console.log("tagsAdded:");
-      console.log(tagsAdded);
-
-      // if (tagsAdded) {
-      addedNews.tags = tags;
-      // }
-      // console.log("addedNews after mapping:");
-      // console.log(addedNews);
-      res
-        .status(201)
-        .json({ addedNews, message: "News was successfully added." });
-    } else {
-      res
-        .status(201)
-        .json({ addedNews, message: "News was successfully added." });
     }
   } catch (e) {
     console.log(e);
