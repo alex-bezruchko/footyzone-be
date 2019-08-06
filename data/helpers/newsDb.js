@@ -18,22 +18,22 @@ module.exports = {
   fetchAllLikes,
   fetchAllTags,
   insertTags,
-  insertNewsTags,
+  insertNewsSubtag,
 };
 
 // function insertNewsTags(newsTag) {
 //   // subtagnews
 // }
-function getTagsById(subtag_id) {
-  return db("subtagnews")
+function getSubtagsById(subtag_id) {
+  return db("subtags")
     .where({ id: subtag_id })
     .first();
 }
-async function insertNewsTags(tagNews) {
-  return db("subtagnews")
-    .insert(tagNews, "id")
+async function insertNewsSubtag(subtag) {
+  return db("subtags")
+    .insert(subtag, "id")
     .then(ids => {
-      return getTagsById(ids[0]);
+      return getSubtagsById(ids[0]);
     });
 }
 

@@ -205,17 +205,17 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 // Post Tags
 
 router.post("/subtags", async (req, res) => {
-  let tags = req.body;
+  let subtags = req.body;
   try {
-    let newTags = [];
-    if (tags.length > 0) {
-      for (let t = 0; t < tags.length; i++) {
-        let insertedTag = await newsDb.insertNewsTags(tag);
-        newTags.push(insertedTag);
+    let newSubtags = [];
+    if (subtags.length > 0) {
+      for (let t = 0; t < subtags.length; i++) {
+        let insertedTag = await newsDb.insertNewsSubtag(tag);
+        newSubtags.push(insertedTag);
       }
     }
-    if (newTags && newTags.length > 0) {
-      res.status(201).json({ newTags, message: "Tags added successfully" });
+    if (newSubtags && newSubtags.length > 0) {
+      res.status(201).json({ newSubtags, message: "Tags added successfully" });
     } else {
       res.status(404).json({ message: "Error processing the request" });
     }
