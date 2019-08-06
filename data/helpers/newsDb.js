@@ -24,12 +24,17 @@ module.exports = {
 // function insertNewsTags(newsTag) {
 //   // subtagnews
 // }
-
-function insertNewsTags(tagNews) {
-  return db("subtagnews").insert(tagNews, "id");
-  .then(ids => {
-    return getById(ids[0]);
-  });
+function getTagsById(subtag_id) {
+  return db("subtagnews")
+    .where({ id: subtag_id })
+    .first();
+}
+async function insertNewsTags(tagNews) {
+  return db("subtagnews")
+    .insert(tagNews, "id")
+    .then(ids => {
+      return getTagsById(ids[0]);
+    });
 }
 
 function welcomeNews() {
