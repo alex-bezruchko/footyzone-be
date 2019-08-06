@@ -239,7 +239,7 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
     // console.log(addedNews);
     if (addedNews) {
-      // console.log(addedNews);
+      console.log(addedNews);
       if (newTags) {
         let finnishedTags = [];
         // new

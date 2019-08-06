@@ -157,7 +157,6 @@ function getById(news_id) {
 }
 
 function insert(news) {
-  console.log(news);
   return db("news")
     .insert(news, "id")
     .then(ids => {
