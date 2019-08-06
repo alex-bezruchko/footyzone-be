@@ -125,6 +125,11 @@ function getLikesByNewsId(news_id) {
 }
 
 function getTagsByNewsId(news_id) {
+  return db("tagnews")
+    .innerJoin("news", "tagnews.news_id", "news.id")
+    .where("tagnews.news_id", "news.id")
+    .andWhere("tagnews.tag_id", "tag_id");
+
   return db
     .select(
       "tagnews.news_id",
