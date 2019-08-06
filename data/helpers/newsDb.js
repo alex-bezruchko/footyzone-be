@@ -164,11 +164,12 @@ function insert(news) {
     });
 }
 
-async function insertTags(subtags) {
+function insertTags(subtags) {
   return db("subtags")
     .insert(subtags, "id")
     .then(ids => {
-      // return db("subtags");
+      console.log();
+      return db("subtags");
     });
 }
 
