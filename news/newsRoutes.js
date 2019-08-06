@@ -240,38 +240,39 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
     // console.log(addedNews);
     // if (addedNews) {
-      console.log(addedNews);
-      if (newTags) {
-        console.log(newTags)
-        let finnishedTags = [];
-        // new
-        for (let i = 0; i < newTags.length; i++) {
-          let finnishedTag = {};
-          finnishedTag.subcat_name = newTag.subcat_name;
-          finnishedTag.subcat_slug = newTag.subcat_slug;
-          finnishedTag.tag_id = newTag.tag_id;
-          console.log(finnishedTag);
-          finnishedTags.push(finnishedTag);
-        }
-
-        console.log("finnishedTags:");
-        console.log(finnishedTags);
-
-        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
-        console.log("tagsAdded:");
-        console.log(tagsAdded);
-
-        // if (tagsAdded) {
-        addedNews.tags = tags;
-        // }
-        // console.log("addedNews after mapping:");
-        // console.log(addedNews);
-        res
-          .status(201)
-          .json({ addedNews, message: "News was successfully added." });
+    console.log(addedNews);
+    if (newTags) {
+      console.log(newTags);
+      let finnishedTags = [];
+      // new
+      for (let i = 0; i < newTags.length; i++) {
+        let finnishedTag = {};
+        finnishedTag.subcat_name = newTag.subcat_name;
+        finnishedTag.subcat_slug = newTag.subcat_slug;
+        finnishedTag.tag_id = newTag.tag_id;
+        console.log(finnishedTag);
+        finnishedTags.push(finnishedTag);
       }
+
+      console.log("finnishedTags:");
+      console.log(finnishedTags);
+
+      let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
+      console.log("tagsAdded:");
+      console.log(tagsAdded);
+
+      // if (tagsAdded) {
+      addedNews.tags = tags;
+      // }
+      // console.log("addedNews after mapping:");
+      // console.log(addedNews);
+      res
+        .status(201)
+        .json({ addedNews, message: "News was successfully added." });
     } else {
-      res.status(404).json("Please enter title and body.");
+      res
+        .status(201)
+        .json({ addedNews, message: "News was successfully added." });
     }
   } catch (e) {
     console.log(e);
