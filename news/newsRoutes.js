@@ -226,8 +226,6 @@ router.post("/", restricted, async (req, res) => {
   let newTags = [];
   try {
     let currentTags = await newsDb.fetchAllTags();
-    console.log("currentTags:");
-    // console.log(currentTags);
     if (tags && tags.length > 0) {
       for (let t = 0; t < tags.length; t++) {
         for (let c = 0; c < currentTags.length; c++) {
@@ -252,9 +250,11 @@ router.post("/", restricted, async (req, res) => {
           finnishedTag.subcat_name = newTag.subcat_name;
           finnishedTag.subcat_slug = newTag.subcat_slug;
           finnishedTag.tag_id = newTag.tag_id;
+          console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
           // newTag.news_id = addedNews.id;
         });
+
         console.log("finnishedTags:");
         console.log(finnishedTags);
 
