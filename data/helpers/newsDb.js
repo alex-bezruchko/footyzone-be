@@ -125,18 +125,7 @@ function getLikesByNewsId(news_id) {
 }
 
 function getTagsByNewsId(news_id) {
-  return db
-    .select(
-      "tags.tag_id",
-      "tags.tag_name",
-      "tags.tag_slug",
-      "tagnews.news_id",
-      "tagnews.tag_id"
-    )
-    .from("tags")
-    .leftJoin("tagnews", "tagnews.news_id", "=", news_id)
-    .leftJoin("tags", "tags.id", "=", "tagnews.tag_id");
-  // .leftJoin("tags", "tags.id", "=", "tagnews.tag_id");
+  return db("tagnews").where({ news_id: news_id });
 }
 function getById(news_id) {
   return db
