@@ -231,14 +231,20 @@ router.post("/", restricted, async (req, res) => {
 
     // if (tags && currentTags) {
     for (let t = 0; t < tags.length; t++) {
+      console.log("Submitted tag: ");
       console.log(tags[t]);
       for (let c = 0; c < currentTags.length; c++) {
+        console.log("Current tag: ");
         console.log(tags[c]);
         if (tags[t].subcat_name !== currentTags[c].subcat_name) {
           let joe = await newsDb.insertTags(tags[t]);
+          console.log("joe");
           console.log(joe);
+          console.log("tags");
           console.log(tags);
           newTags.push(tags);
+          console.log("newTags");
+          console.log(newTags);
         }
       }
       // }
