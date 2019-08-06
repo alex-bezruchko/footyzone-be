@@ -226,10 +226,7 @@ router.post("/", restricted, async (req, res) => {
   let newTags = [];
   try {
     let currentTags = await newsDb.fetchAllTags();
-    // console.log(tags)
-    // console.log(currentTags)
 
-    // if (tags && currentTags) {
     for (let t = 0; t < tags.length; t++) {
       console.log("Submitted tag: ");
       console.log(tags[t]);
@@ -251,13 +248,8 @@ router.post("/", restricted, async (req, res) => {
       }
       // }
     }
-    console.log("newTags");
-    console.log(newTags);
     let addedNews = await newsDb.insert(newNews);
-    // console.log(addedNews);
-    // if (addedNews) {
-    console.log("addedNews");
-    console.log(addedNews);
+
     if (addedNews) {
       if (newTags.length > 0) {
         // console.log(newTags);
@@ -282,17 +274,16 @@ router.post("/", restricted, async (req, res) => {
         // if (tagsAdded) {
         // }
         // console.log("addedNews after mapping:");
-        if (addedNews) {
-          addedNews.tags = [];
-          addedNews.tags = req.body.tags;
-          res
-            .status(201)
-            .json({ addedNews, message: "News was successfully added." });
-        } else {
-          console.log(addedNews);
-          res.status(404).json({ message: "Theere was an error adding it." });
-        }
+        addedNews.tags = [];
+        addedNews.tags = req.body.tags;
+        res
+          .status(201)
+          .json({ addedNews, message: "News was successfully added." });
       }
+      // }
+    } else {
+      console.log(addedNews);
+      res.status(404).json({ message: "Theere was an error adding it." });
     }
   } catch (e) {
     console.log(e);
