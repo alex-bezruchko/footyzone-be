@@ -241,7 +241,7 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
     // console.log(addedNews);
     if (addedNews) {
-      console.log(addedNews);
+      // console.log(addedNews);
       if (newTags) {
         let finnishedTags = [];
         // new
@@ -255,15 +255,18 @@ router.post("/", restricted, async (req, res) => {
           finnishedTags.push(finnishedTag);
           // newTag.news_id = addedNews.id;
         });
-        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
-        console.log(tagsAdded);
+        console.log("finnishedTags:");
         console.log(finnishedTags);
+
+        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
+        console.log("tagsAdded:");
+        console.log(tagsAdded);
 
         // if (tagsAdded) {
         addedNews.tags = finnishedTags;
         // }
         console.log("addedNews after mapping:");
-        // console.log(addedNews);
+        console.log(addedNews);
         res
           .status(201)
           .json({ addedNews, message: "News was successfully added." });
