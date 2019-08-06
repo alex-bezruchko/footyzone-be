@@ -18,22 +18,22 @@ module.exports = {
   fetchAllLikes,
   fetchAllTags,
   insertTags,
-  insertNewsSubtag,
+  insertNewsTags,
 };
 
 // function insertNewsTags(newsTag) {
 //   // subtagnews
 // }
-function getSubtagsById(subtag_id) {
-  return db("subtags")
-    .where({ id: subtag_id })
+function getTagsById(tags_id) {
+  return db("tags")
+    .where({ id: tags_id })
     .first();
 }
-async function insertNewsSubtag(subtag) {
-  return db("subtags")
-    .insert(subtag, "id")
+async function insertNewsTags(tag) {
+  return db("tags")
+    .insert(tag, "id")
     .then(ids => {
-      return getSubtagsById(ids[0]);
+      return getTagsById(ids[0]);
     });
 }
 
@@ -98,7 +98,7 @@ function fetchAllSubCategories() {
 }
 
 function fetchAllTags() {
-  return db("subtags");
+  return db("tags");
 }
 function getBySubCategoryId(subcat_id) {
   return db
@@ -124,19 +124,18 @@ function getLikesByNewsId(news_id) {
   return db("newslikes").where({ news_id: news_id });
 }
 
-function getTagsByNewsId(news_id) {
-  return db
-    .select(
-      "subtags.subtag_name",
-      "tags.tag_name",
-      "tags.tag_slug",
-      "subtags.subtag_slug"
-    )
-    .from("subtags")
-    .where({ news_id: news_id })
-    .leftJoin("subtagnews", "subtagnews.subtag_id", "=", "subtags.id")
-    .leftJoin("tags", "subtags.tag_id", "=", "tags.id");
-}
+// function getTagsByNewsId(news_id) {
+//   return db
+//     .select(
+//       "tags.tag_name",
+//       "tags.tag_slug",
+//       "news.news_id"
+//     )
+//     .from("tags")
+//     .where({ news_id: news_id })
+//     .leftJoin("news", "news.id", "=", "tags.user_id")
+
+// }
 function getById(news_id) {
   return db
     .select(
@@ -169,12 +168,12 @@ function insert(news) {
     });
 }
 
-function insertTags(subtags) {
-  return db("subtags")
-    .insert(subtags, "id")
+function insertTags(tags) {
+  return db("tags")
+    .insert(tags, "id")
     .then(ids => {
       console.log();
-      return db("subtags");
+      return db("tags");
     });
 }
 
