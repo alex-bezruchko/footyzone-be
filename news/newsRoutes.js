@@ -289,6 +289,7 @@ router.post("/", restricted, async (req, res) => {
             .status(201)
             .json({ addedNews, message: "News was successfully added." });
         } else {
+          console.log(addedNews);
           res.status(404).json({ message: "Theere was an error adding it." });
         }
       }
