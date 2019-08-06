@@ -21,11 +21,11 @@ module.exports = {
   insertNewsTags,
 };
 
-function insertNewsTags(tag_id, news_id) {
-  // subtagnews
-}
+// function insertNewsTags(newsTag) {
+//   // subtagnews
+// }
 
-async function insertNewsTags(tagNews) {
+function insertNewsTags(tagNews) {
   return db("subtagnews").insert(tagNews, "id");
   // .then(ids => {
   //   return getById(ids[0]);
