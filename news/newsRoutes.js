@@ -213,7 +213,7 @@ router.post("/", restricted, async (req, res) => {
     newsMainImg,
     tags,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   let newNews = {
     title: title,
     published: published,
@@ -244,8 +244,8 @@ router.post("/", restricted, async (req, res) => {
         let finnishedTags = [];
         // new
         newTags.map(newTag => {
-          // console.log("mapped newTag:");
-          // console.log(newTag);
+          console.log("mapped newTag:");
+          console.log(newTag);
           let finnishedTag = {};
           finnishedTag.subcat_name = newTag.subcat_name;
           finnishedTag.subcat_slug = newTag.subcat_slug;
@@ -265,8 +265,8 @@ router.post("/", restricted, async (req, res) => {
         // if (tagsAdded) {
         addedNews.tags = finnishedTags;
         // }
-        console.log("addedNews after mapping:");
-        console.log(addedNews);
+        // console.log("addedNews after mapping:");
+        // console.log(addedNews);
         res
           .status(201)
           .json({ addedNews, message: "News was successfully added." });
