@@ -238,21 +238,23 @@ router.post("/", restricted, async (req, res) => {
         console.log(tags[c]);
         if (tags[t].subcat_name !== currentTags[c].subcat_name) {
           let joe = await newsDb.insertTags(tags[t]);
-          console.log("joe");
-          console.log(joe);
-          console.log("tags");
-          console.log(tags);
+          // console.log("joe");
+          // console.log(joe);
+          // console.log("tags");
+          // console.log(tags);
           newTags.push(joe);
-          console.log("newTags");
-          console.log(newTags);
+          // console.log("newTags");
+          // console.log(newTags);
         }
       }
       // }
     }
+    console.log("newTags");
     console.log(newTags);
     let addedNews = await newsDb.insert(newNews);
     // console.log(addedNews);
     // if (addedNews) {
+    console.log("addedNews");
     console.log(addedNews);
     if (addedNews) {
       if (newTags.length > 0) {
@@ -273,8 +275,8 @@ router.post("/", restricted, async (req, res) => {
 
         let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
         // console.log("tagsAdded:");
-        // console.log(tagsAdded);
-        console.log(tags);
+        console.log(tagsAdded);
+        // console.log(tags);
         // if (tagsAdded) {
         addedNews.tags = tags;
         // }
