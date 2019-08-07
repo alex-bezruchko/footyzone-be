@@ -181,6 +181,7 @@ router.get("/:subcat_slug/:id", async (req, res) => {
     const news = await newsDb.getById(id);
     if (news) {
       const newsTags = await newsDb.getTagsByNewsId(id);
+      console.log(newsTags);
       const newsLikes = await newsDb.getLikesByNewsId(id);
       if (newsLikes) {
         news.likes = newsLikes;
@@ -218,17 +219,25 @@ router.post("/subtags", async (req, res) => {
       if (newSubtags && newSubtags.length > 0) {
         res
           .status(201)
-          .json({ newSubtags, message: "Tags added successfully" });
+          .json({
+            newSubtags,
+            message: "Tags added successfully"
+          });
       } else {
         // console.log(me)
-        res.status(404).json({ message: "Error processing the request" });
+        res.status(404).json({
+          message: "Error processing the request"
+        });
       }
     }
 
     // let insertedTags =
   } catch (e) {
     console.log(e);
-    res.status(500).json({ e, message: "Server error" });
+    res.status(500).json({
+      e,
+      message: "Server error"
+    });
   }
 });
 router.post("/", restricted, async (req, res) => {
@@ -287,11 +296,16 @@ router.post("/", restricted, async (req, res) => {
       addedNews.tags = req.body.tags;
       res
         .status(201)
-        .json({ addedNews, message: "News was successfully added." });
+        .json({
+          addedNews,
+          message: "News was successfully added."
+        });
       // }
     } else {
       console.log(addedNews);
-      res.status(404).json({ message: "Theere was an error adding it." });
+      res.status(404).json({
+        message: "Theere was an error adding it."
+      });
     }
   } catch (e) {
     console.log(e);
@@ -343,7 +357,10 @@ router.put("/:id", restricted, upload.single("newsMainImg"), (req, res) => {
       .update(id, updatedNews)
       .then(news => {
         if (news) {
-          res.status(201).json({ news, message: "News was updated." });
+          res.status(201).json({
+            news,
+            message: "News was updated."
+          });
         } else {
           res.status(404).json("Please enter title and body.");
         }
