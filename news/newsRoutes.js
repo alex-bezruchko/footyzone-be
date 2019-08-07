@@ -213,7 +213,7 @@ router.post("/subtags", async (req, res) => {
     if (subtags.length > 0) {
       for (let t = 0; t < subtags.length; t++) {
         // let tag = subtags[i]
-        let insertedTag = await newsDb.insertNewsSubtag(subtags[t]);
+        let insertedTag = await newsDb.insertNewsTags(subtags[t]);
         newSubtags.push(insertedTag);
       }
       if (newSubtags && newSubtags.length > 0) {
