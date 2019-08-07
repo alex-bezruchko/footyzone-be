@@ -120,7 +120,7 @@ router.get("/subcategories", async (req, res) => {
   }
 });
 
-router.get("/:id/subtags", async (req, res) => {
+router.get("/:id/tags", async (req, res) => {
   let id = this.props.match.params.id;
   try {
     const allSubcats = await newsDb.fetch();
@@ -205,22 +205,22 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 
 // Post Tags
 
-router.post("/subtags", async (req, res) => {
-  let subtags = req.body;
+router.post("/tags", async (req, res) => {
+  let tags = req.body;
   console.log(req.body);
   try {
-    let newSubtags = [];
-    if (subtags.length > 0) {
-      for (let t = 0; t < subtags.length; t++) {
-        // let tag = subtags[i]
-        let insertedTag = await newsDb.insertNewsTags(subtags[t]);
-        newSubtags.push(insertedTag);
+    let newTags = [];
+    if (tags.length > 0) {
+      for (let t = 0; t < tags.length; t++) {
+        // let tag = tags[i]
+        let insertedTag = await newsDb.insertNewsTags(tags[t]);
+        newTags.push(insertedTag);
       }
-      if (newSubtags && newSubtags.length > 0) {
+      if (newTags && newTags.length > 0) {
         res
           .status(201)
           .json({
-            newSubtags,
+            newTags,
             message: "Tags added successfully"
           });
       } else {
