@@ -26,7 +26,9 @@ module.exports = {
 // }
 function getTagsById(tags_id) {
   return db("tags")
-    .where({ id: tags_id })
+    .where({
+      id: tags_id
+    })
     .first();
 }
 async function insertNewsTags(tag) {
@@ -84,15 +86,21 @@ function fetchAll() {
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
     .orderBy("news.id", "desc");
 }
+
 function fetchAllLikes() {
   return db("newslikes");
 }
+
 function fetchUsersNews(id) {
-  return db("news").where({ user_id: id });
+  return db("news").where({
+    user_id: id
+  });
 }
+
 function fetchAllCategories() {
   return db("categories");
 }
+
 function fetchAllSubCategories() {
   return db("subcategories");
 }
@@ -100,6 +108,7 @@ function fetchAllSubCategories() {
 function fetchAllTags() {
   return db("tags");
 }
+
 function getBySubCategoryId(subcat_id) {
   return db
     .select(
@@ -116,17 +125,29 @@ function getBySubCategoryId(subcat_id) {
       "subcategories.subcat_slug"
     )
     .from("news")
-    .where({ subcat_id: subcat_id })
+    .where({
+      subcat_id: subcat_id
+    })
     .leftJoin("users", "users.id", "=", "news.user_id")
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
+
 function getLikesByNewsId(news_id) {
-  return db("newslikes").where({ news_id: news_id });
+  return db("newslikes").where({
+    news_id: news_id
+  });
 }
 
 function getTagsByNewsId(news_id) {
-  return db("tagnews").where({ news_id: news_id });
+  // return db("tagnews").where({ news_id: news_id });
+
+  return db.select("news.*", "tags.*")
+    .from("news")
+    .leftJoin("tagnews", "tagnews.news_id", "news.id")
+    .leftJoin("tags", "tagnews.tag_id", "tags.id")
+    .where("news.id", news_id);
 }
+
 function getById(news_id) {
   return db
     .select(
@@ -170,9 +191,11 @@ function insertTags(tags) {
 
 async function update(id, changes) {
   return db("news")
-    .where({ id })
+    .where({
+      id
+    })
     .update(changes)
-    .then(function() {
+    .then(function () {
       return getById(id);
     });
 }
