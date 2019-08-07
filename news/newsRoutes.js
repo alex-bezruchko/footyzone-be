@@ -136,12 +136,12 @@ router.get("/:id/tags", async (req, res) => {
   }
 });
 
-router.get("/subtags", async (req, res) => {
+router.get("/tags", async (req, res) => {
   try {
-    const allSubcats = await newsDb.fetchAllTags();
+    const allTags = await newsDb.fetchAllTags();
 
-    if (allSubcats) {
-      res.status(200).json(allSubcats);
+    if (allTags) {
+      res.status(200).json(allTags);
     } else {
       res.status(404).json("Subcategories do not exist.");
     }
