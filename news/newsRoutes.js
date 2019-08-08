@@ -235,7 +235,7 @@ router.post("/tags", async (req, res) => {
   }
 });
 router.post("/", restricted, async (req, res) => {
-  const { title, user_id, published, body, summary, newsImage } = req.body;
+  const { title, user_id, published, body, summary, newsMainImg } = req.body;
   let newNews = {
     title: title,
     user_id: user_id,
@@ -243,7 +243,7 @@ router.post("/", restricted, async (req, res) => {
     body: body,
     summary: summary,
     subcat_id: 2,
-    newsImage: newsImage
+    newsMainImg: newsMainImg
   }
   const { tags } = req.body
 
