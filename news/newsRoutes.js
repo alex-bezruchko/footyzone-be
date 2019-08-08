@@ -214,24 +214,18 @@ router.post("/tags", async (req, res) => {
       for (let t = 0; t < tags.length; t++) {
         // let tag = tags[i]
         let insertedTag = await newsDb.insertNewsTags(tags[t]);
+        // if (insertedTag)
         newTags.push(insertedTag);
       }
-      if (newTags && newTags.length > 0) {
+      if (newTags) {
         res
           .status(201)
           .json({
             newTags,
             message: "Tags added successfully"
           });
-      } else {
-        // console.log(me)
-        res.status(404).json({
-          message: "Error processing the request"
-        });
       }
     }
-
-    // let insertedTags =
   } catch (e) {
     console.log(e);
     res.status(500).json({
@@ -268,15 +262,15 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
 
     if (addedNews) {
-      if (newTags.length > 0) {
+      console.log(addedNews)
+      if (tags.length > 0) {
         // console.log(newTags);
         let finnishedTags = [];
         // new
-        for (let i = 0; i < newTags.length; i++) {
+        for (let i = 0; i < tags.length; i++) {
           let finnishedTag = {};
-          finnishedTag.subcat_name = newTag.subcat_name;
-          finnishedTag.subcat_slug = newTag.subcat_slug;
-          finnishedTag.tag_id = newTag.tag_id;
+          finnishedTag.news_id = addedNews.id;
+          finnishedTag.tag_id = tags.tag_id;
           console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
         }
