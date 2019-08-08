@@ -250,23 +250,23 @@ router.post("/", restricted, async (req, res) => {
   // let newTags = [];
   try {
     // let currentTags = await newsDb.fetchAllTags();
-    console.log('req.body:');
-    console.log(newNews);
+    // console.log('req.body:');
+    // console.log(newNews);
     let addedNews = await newsDb.insert(newNews);
-    console.log('let addedNews:');
-    console.log(addedNews);
+    // console.log('let addedNews:');
+    // console.log(addedNews);
 
     if (addedNews) {
       console.log('if addedNews')
       console.log(addedNews)
-      if (newNews.tags.length > 0) {
+      if (tags.length > 0) {
         // console.log(newTags);
         let finnishedTags = [];
         // new
         for (let i = 0; i < tags.length; i++) {
           let finnishedTag = {};
           finnishedTag.news_id = addedNews.id;
-          finnishedTag.tag_id = tags.tag_id;
+          finnishedTag.tag_id = tags[i].id;
           console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
         }
