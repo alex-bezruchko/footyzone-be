@@ -235,35 +235,21 @@ router.post("/tags", async (req, res) => {
   }
 });
 router.post("/", restricted, async (req, res) => {
-  const {
-    user_id,
-    title,
-    body,
-    subcat_id,
-    summary,
-    published,
-    newsMainImg,
-    tags,
-  } = req.body;
-  let newNews = {
-    title: title,
-    published: published,
-    summary: summary,
-    body: body,
-    newsMainImg: newsMainImg,
-    user_id: user_id,
-    subcat_id: subcat_id,
-  };
-  let newTags = [];
+  const newNews = req.body;
+
+  // let newTags = [];
   try {
     // let currentTags = await newsDb.fetchAllTags();
+    console.log('req.body:');
     console.log(newNews);
     let addedNews = await newsDb.insert(newNews);
+    console.log('let addedNews:');
+    console.log(addedNews);
 
     if (addedNews) {
-      console.log('addedNews')
+      console.log('if addedNews')
       console.log(addedNews)
-      if (tags.length > 0) {
+      if (newNews.tags.length > 0) {
         // console.log(newTags);
         let finnishedTags = [];
         // new
@@ -279,13 +265,16 @@ router.post("/", restricted, async (req, res) => {
 
         // console.log("finnishedTags:");
         // console.log(finnishedTags);
-
-        let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
+        let addedTags = [];
+        for (let t = 0; t < finnishedTags.length; t++) {
+          let tagsAdded = await newsDb.insertNewsTags(finnishedTags[t]);
+          addedTags.push(finnishedTags[t])
+        }
         console.log("tagsAdded:");
         console.log(tagsAdded);
         // console.log(tags);
-        if (tagsAdded) {
-          addedNews.tags = tags;
+        if (addedTags) {
+          addedNews.tags = addedTags;
         } else {
           addedNews.tags = [];
         }
