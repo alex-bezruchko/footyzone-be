@@ -262,6 +262,7 @@ router.post("/", restricted, async (req, res) => {
     let addedNews = await newsDb.insert(newNews);
 
     if (addedNews) {
+      console.log('addedNews')
       console.log(addedNews)
       if (tags.length > 0) {
         // console.log(newTags);
@@ -274,20 +275,23 @@ router.post("/", restricted, async (req, res) => {
           console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
         }
+        console.log('finnishedTags')
+        console.log(finnishedTags)
 
         // console.log("finnishedTags:");
         // console.log(finnishedTags);
 
         let tagsAdded = await newsDb.insertNewsTags(finnishedTags);
-        // console.log("tagsAdded:");
+        console.log("tagsAdded:");
         console.log(tagsAdded);
         // console.log(tags);
-        // if (tagsAdded) {
-        // }
+        if (tagsAdded) {
+          addedNews.tags = tags;
+        } else {
+          addedNews.tags = [];
+        }
         // console.log("addedNews after mapping:");
       }
-      addedNews.tags = [];
-      addedNews.tags = req.body.tags;
       res
         .status(201)
         .json({
