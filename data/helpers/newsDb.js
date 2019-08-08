@@ -21,9 +21,9 @@ module.exports = {
   insertNewsTags,
 };
 
-// function insertNewsTags(newsTag) {
-//   // subtagnews
-// }
+function insertNewsTags(newsTag) {
+  return db("tagnews").insert(newsTag, "id")
+}
 function getTagsById(tags_id) {
   return db("tags")
     .where({
