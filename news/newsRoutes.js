@@ -245,7 +245,6 @@ router.post("/", restricted, async (req, res) => {
     newsMainImg,
     tags,
   } = req.body;
-  console.log(req.body.tags);
   let newNews = {
     title: title,
     published: published,
@@ -258,7 +257,7 @@ router.post("/", restricted, async (req, res) => {
   let newTags = [];
   try {
     // let currentTags = await newsDb.fetchAllTags();
-
+    console.log(newNews);
     let addedNews = await newsDb.insert(newNews);
 
     if (addedNews) {
@@ -300,7 +299,6 @@ router.post("/", restricted, async (req, res) => {
         });
       // }
     } else {
-      console.log(addedNews);
       res.status(404).json({
         message: "Theere was an error adding it."
       });
