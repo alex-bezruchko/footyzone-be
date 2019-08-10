@@ -262,11 +262,15 @@ router.post("/", restricted, async (req, res) => {
       if (tags.length > 0) {
         // console.log(newTags);
         let finnishedTags = [];
-        // new
+        console.log('tags')
+        console.log(tags)
         for (let i = 0; i < tags.length; i++) {
           let finnishedTag = {};
           finnishedTag.news_id = addedNews.id;
           finnishedTag.tag_id = tags[i].id;
+          console.log('tags[i]')
+          console.log(tags[i])
+          console.log('finnishedTag');
           console.log(finnishedTag);
           finnishedTags.push(finnishedTag);
         }
@@ -275,13 +279,16 @@ router.post("/", restricted, async (req, res) => {
 
         // console.log("finnishedTags:");
         // console.log(finnishedTags);
-        let addedTags = [];
+        let addedTagNews = [];
         for (let t = 0; t < finnishedTags.length; t++) {
+          console.log(finnishedTags)
           let tagsAdded = await newsDb.insertNewsTags(finnishedTags[t]);
-          addedTags.push(finnishedTags[t])
+          console.log('tagsAdded')
+          console.log(tagsAdded);
+          addedTagNews.push(finnishedTags[t])
         }
-        console.log("tagsAdded:");
-        console.log(tagsAdded);
+        console.log("addedTagNews:");
+        console.log(addedTags);
         // console.log(tags);
         if (addedTags) {
           addedNews.tags = addedTags;
