@@ -52,6 +52,7 @@ function welcomeNews() {
       "users.username",
       "users.avatar",
       "subcategories.subcat_name",
+      "subcategories.logo",
       "subcategories.subcat_slug"
     )
     .from("news")
@@ -79,6 +80,7 @@ function fetchAll() {
       "users.username",
       "users.avatar",
       "subcategories.subcat_name",
+      "subcategories.logo",
       "subcategories.subcat_slug"
     )
     .from("news")
@@ -122,6 +124,7 @@ function getBySubCategoryId(subcat_id) {
       "users.username",
       "users.avatar",
       "subcategories.subcat_name",
+      "subcategories.logo",
       "subcategories.subcat_slug"
     )
     .from("news")
@@ -162,6 +165,7 @@ function getById(news_id) {
       "users.username",
       "users.avatar",
       "subcategories.subcat_slug",
+      "subcategories.logo",
       "subcategories.subcat_name"
     )
     .from("news")
