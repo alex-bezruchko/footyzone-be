@@ -1,7 +1,7 @@
 exports.seed = function (knex, Promise) {
   return knex("subcategories").insert([
     {
-      subcat_name: "Champions League",
+      subcat_name: "Uefa CL",
       subcat_slug: "uefacl",
       category_id: 1,
       logo: "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565535779/mmr1dusiwaotfis0oswj.svg"
