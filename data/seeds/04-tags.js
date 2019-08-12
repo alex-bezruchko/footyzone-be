@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   return knex("tags").insert([
     {
       tag_name: "Leo Messi",
@@ -48,6 +48,18 @@ exports.seed = function(knex, Promise) {
     {
       tag_name: "Gareth Bale",
       tag_slug: "gareth-bale",
+    },
+    {
+      tag_name: "Kante",
+      tag_slug: "kante",
+    },
+    {
+      tag_name: "Arsenal",
+      tag_slug: "arsenal",
+    },
+    {
+      tag_name: "Chelsea",
+      tag_slug: "chelsea",
     },
   ]);
 };
