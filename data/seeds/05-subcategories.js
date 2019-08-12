@@ -16,7 +16,7 @@ exports.seed = function (knex, Promise) {
       subcat_name: "La Liga",
       subcat_slug: "laliga",
       category_id: 1,
-      logo: "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565535814/nd2sp2hsx5yu7tjqqlfu.png"
+      logo: "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565580275/mhljmbcqee9ci1i4plsx.png"
     },
     {
       subcat_name: "Goals",
