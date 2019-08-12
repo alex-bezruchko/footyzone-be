@@ -4,7 +4,7 @@ exports.seed = function (knex, Promise) {
       subcat_name: "Uefa CL",
       subcat_slug: "uefacl",
       category_id: 1,
-      logo: "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565535779/mmr1dusiwaotfis0oswj.svg"
+      logo: "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565625636/drcqwvonqsfuhnwee7iz.png"
     },
     {
       subcat_name: "Premier League",
