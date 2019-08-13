@@ -35,7 +35,7 @@ async function insert(user) {
     });
 }
 
-function findBy(username) {
+async function findBy(username) {
   return db("users").where({ username: username }).first();
 }
 // async function update(id, changes) {

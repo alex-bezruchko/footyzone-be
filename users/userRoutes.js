@@ -95,39 +95,33 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:avatar", (req, res) => {
+router.put("/:avatar", async (req, res) => {
   console.log('req.body:')
   console.log(req.body)
-  const avatar = req.params.avatar;
-  const updatedUser = req.body;
+  const avatar = req.params.avatar.toLowerCase();
+  let updatedBody = req.body;
   let newInfo = {};
-  let currentUser = userDb.findBy(avatar.toLowerCase());
+  try {
+    let currentUser = await userDb.findBy(avatar);
+    if (currentUser) {
+      newInfo.user_id = currentUser.user_id;
+      newInfo.password = currentUser.password;
+      newInfo.role_id = currentUser.role_id;
+      newInfo.username = updatedBody.username;
+      newInfo.avatar = updatedBody.avatar;
 
-  newInfo.user_id = currentUser.user_id;
-  newInfo.username = updatedUser.username;
-  newInfo.password = currentUser.password;
-  newInfo.role_id = currentUser.role_id;
-  newInfo.avatar = updatedUser.avatar;
-
-  if (currentUser) {
-
-    userDb
-      .update(newInfo.user_id, newInfo)
-      .then(user => {
-        console.log('then user:')
-        console.log(user)
-
-        if (user) {
-          res.status(201).json({ user, message: "User was updated." });
-        } else {
-          res.status(404).json("Please enter title and body.");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      let updatedUser = await userDb.update(newInfo.user_id, newInfo);
+      if (updatedUser) {
+        res.status(201).json({ updatedUser, message: "User was updated." });
+      } else {
+        res.status(404).json("Please enter title and body.");
+      }
+    }
+  } catch (e) {
+    console.log(err);
+    res.status(500).json(err);
   }
+
 
 });
 
