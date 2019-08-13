@@ -118,8 +118,8 @@ router.put("/:avatar", async (req, res) => {
       }
     }
   } catch (e) {
-    console.log(err);
-    res.status(500).json(err);
+    console.log(e);
+    res.status(500).json(e);
   }
 
 
