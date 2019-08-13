@@ -76,13 +76,13 @@ router.put("/:avatar", async (req, res) => {
     let currentUser = await userDb.findBy(avatar);
     if (currentUser) {
       console.log(currentUser)
-      newInfo.user_id = currentUser.id;
+      newInfo.id = currentUser.id;
       newInfo.password = currentUser.password;
       newInfo.role_id = currentUser.role_id;
       newInfo.username = updatedBody.username;
       newInfo.avatar = updatedBody.avatar;
 
-      let updatedUser = await userDb.update(newInfo.user_id, newInfo);
+      let updatedUser = await userDb.update(newInfo.id, newInfo);
       if (updatedUser) {
         res.status(201).json({ updatedUser, message: "User was updated." });
       } else {
