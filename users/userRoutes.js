@@ -104,6 +104,7 @@ router.put("/:avatar", async (req, res) => {
   try {
     let currentUser = await userDb.findBy(avatar);
     if (currentUser) {
+      console.log(currentUser)
       newInfo.user_id = currentUser.user_id;
       newInfo.password = currentUser.password;
       newInfo.role_id = currentUser.role_id;
