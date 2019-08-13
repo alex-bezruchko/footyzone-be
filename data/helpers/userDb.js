@@ -43,9 +43,9 @@ async function update(id, changes) {
   return db("users")
     .where({ id })
     .update(changes)
-  // .then(ids => {
-  //   return getById(ids[0]);
-  // });
+    .then(ids => {
+      return getById(id);
+    });
 }
 
 function remove(id) {
