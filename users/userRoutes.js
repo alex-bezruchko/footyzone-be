@@ -111,7 +111,7 @@ router.put("/:avatar", (req, res) => {
 
 
   userDb
-    .update(id, newInfo)
+    .update(newInfo.user_id, newInfo)
     .then(user => {
       console.log('then user:')
       console.log(user)
