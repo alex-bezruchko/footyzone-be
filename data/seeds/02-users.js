@@ -1,34 +1,39 @@
 // const jwt = require('jsonwebtoken');
 const bcrypt = require("bcryptjs");
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   return knex("users").insert([
     {
-      username: "Merse",
+      id: 1,
+      username: "merse",
       password: bcrypt.hashSync("mersepass", 10),
       role_id: 1,
       avatar:
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1563587602/cb8pdmlwpckftutit7mx.png",
     }, // 1
     {
-      username: "Gazza",
+      id: 2,
+      username: "gazza",
       password: bcrypt.hashSync("gazzapass", 10),
       role_id: 3,
       avatar:
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1563588967/jax7ezhkba2lxybxpizp.png",
     }, // 2
     {
-      username: "Joey",
+      id: 3,
+      username: "joey",
       password: bcrypt.hashSync("joeypass", 10),
-      role_id: 4,
+      role_id: 2,
       avatar:
         "https://res.cloudinary.com/htg1iqq1p/image/upload/v1563589016/vaeq5qshowwit6iubhxm.png",
     }, // 3
-    { username: "Peregrin", password: "peregrinpass", role_id: 1 }, // 4
-    { username: "Mithrandir", password: "mithrandirpass", role_id: 4 }, // 5
-    { username: "Boromir", password: "boromirpass", role_id: 2 }, // 6
-    { username: "Legolas", password: "legolaspass", role_id: 3 }, // 7
-    { username: "Gimly", password: "gimlypass", role_id: 3 }, // 8
-    { username: "Aragorn", password: "aragornpass", role_id: 4 }, // 9
+    {
+      id: 4,
+      username: "spock",
+      password: bcrypt.hashSync("spockpass", 10),
+      role_id: 1,
+      avatar:
+        "https://res.cloudinary.com/htg1iqq1p/image/upload/v1565725262/bye9b0qbhmv0ir4tzhwd.jpg",
+    }
   ]);
 };
