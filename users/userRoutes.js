@@ -96,12 +96,12 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:avatar", (req, res) => {
-  console.log('req')
-  console.log(req)
-  const id = req.params.id;
+  console.log('req.body:')
+  console.log(req.body)
+  const avatar = req.params.avatar;
   const updatedUser = req.body;
   let newInfo = {};
-  let currentUser = userDb.findBy(req.params.avatar.toLowerCase());
+  let currentUser = userDb.findBy(avatar.toLowerCase());
 
   newInfo.user_id = currentUser.user_id;
   newInfo.username = updatedUser.username;
@@ -109,23 +109,25 @@ router.put("/:avatar", (req, res) => {
   newInfo.role_id = currentUser.role_id;
   newInfo.avatar = updatedUser.avatar;
 
+  if (currentUser) {
 
-  userDb
-    .update(newInfo.user_id, newInfo)
-    .then(user => {
-      console.log('then user:')
-      console.log(user)
+    userDb
+      .update(newInfo.user_id, newInfo)
+      .then(user => {
+        console.log('then user:')
+        console.log(user)
 
-      if (user) {
-        res.status(201).json({ user, message: "User was updated." });
-      } else {
-        res.status(404).json("Please enter title and body.");
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+        if (user) {
+          res.status(201).json({ user, message: "User was updated." });
+        } else {
+          res.status(404).json("Please enter title and body.");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
 
 });
 
