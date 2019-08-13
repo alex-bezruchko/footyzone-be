@@ -95,57 +95,32 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", upload.single("avatar"), (req, res) => {
+router.put("/:avatar", (req, res) => {
   const id = req.params.id;
   const updatedUser = req.body;
-  console.log(updatedUser);
-  console.log(req.body);
-  let currentUser = userDb.getById(id);
+
+  let currentUser = userDb.findBy(avatar);
+
   updatedUser.user_id = currentUser.user_id;
-  updatedUser.avatar = currentUser.user_id;
+  updatedUser.avatar = updatedUser.avatar;
   updatedUser.password = currentUser.password;
-  const imageUri = req =>
-    newUri.format(
-      path.extname(req.file.originalname).toString(),
-      req.file.buffer
-    );
+  updatedUser.user_id = currentUser.user_id;
 
-  const file = imageUri(req).content;
 
-  cloudinary.uploader.upload(file, result => {
-    console.log(result);
-    if (result.secure_url) {
-      updatedUser.avatar = result.secure_url;
-    }
+  userDb
+    .update(id, updatedUser)
+    .then(user => {
+      if (user) {
+        res.status(201).json({ user, message: "User was updated." });
+      } else {
+        res.status(404).json("Please enter title and body.");
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 
-    userDb
-      .update(id, updatedUser)
-      .then(user => {
-        if (user) {
-          res.status(201).json({ user, message: "User was updated." });
-        } else {
-          res.status(404).json("Please enter title and body.");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
-
-  // try {
-  //   const updated = await userDb.update(id, updatedUser);
-  //   console.log(updated);
-
-  //   if (updated) {
-  //     res.status(201).json("User updated.");
-  //   } else {
-  //     res.status(404).json("User id is unavailable.");
-  //   }
-  // } catch (e) {
-  //   console.log(e);
-  //   res.status(500).json(e);
-  // }
 });
 
 router.delete("/:id", async (req, res) => {
