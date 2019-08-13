@@ -43,13 +43,13 @@ async function findBy(nickname) {
 //     .where({ id })
 //     .update(changes);
 // }
-async function update(id, changes) {
-  console.log('id')
-  console.log(id)
+async function update(user_id, changes) {
+  console.log('user_id')
+  console.log(user_id)
   console.log('changes')
   console.log(changes)
   return db("users")
-    .where({ id })
+    .where({ id: user_id })
     .update(changes)
     .then(ids => {
       return getById(ids[0]);
