@@ -33,7 +33,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
-  let lowerCased = username.toLowerCase()
+  let lowerCased = username.toLowerCase();
   users
     .findBy({ lowerCased })
     .first()
