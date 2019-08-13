@@ -96,6 +96,8 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:avatar", (req, res) => {
+  console.log('req')
+  console.log(req)
   const id = req.params.id;
   const updatedUser = req.body;
   let newInfo = {};
@@ -111,6 +113,9 @@ router.put("/:avatar", (req, res) => {
   userDb
     .update(id, newInfo)
     .then(user => {
+      console.log('then user:')
+      console.log(user)
+
       if (user) {
         res.status(201).json({ user, message: "User was updated." });
       } else {
