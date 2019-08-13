@@ -39,13 +39,13 @@ async function findBy(nickname) {
   return db("users").where({ username: nickname }).first();
 }
 
-async function update(user_id, changes) {
+async function update(id, changes) {
   return db("users")
-    .where("id", user_id)
+    .where({ id })
     .update(changes)
-    .then(ids => {
-      return getById(ids[0]);
-    });
+  // .then(ids => {
+  //   return getById(ids[0]);
+  // });
 }
 
 function remove(id) {
