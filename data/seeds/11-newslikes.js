@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   return knex("newslikes").insert([
     {
       user_id: 1,
@@ -9,19 +9,19 @@ exports.seed = function(knex, Promise) {
       news_id: 2,
     },
     {
-      user_id: 6,
+      user_id: 4,
       news_id: 2,
     },
     {
-      user_id: 6,
+      user_id: 1,
       news_id: 1,
     },
     {
-      user_id: 7,
+      user_id: 4,
       news_id: 1,
     },
     {
-      user_id: 5,
+      user_id: 4,
       news_id: 1,
     },
     {
@@ -65,11 +65,11 @@ exports.seed = function(knex, Promise) {
       news_id: 6,
     },
     {
-      user_id: 7,
+      user_id: 2,
       news_id: 6,
     },
     {
-      user_id: 6,
+      user_id: 2,
       news_id: 3,
     },
     {
@@ -79,6 +79,18 @@ exports.seed = function(knex, Promise) {
     {
       user_id: 4,
       news_id: 2,
+    },
+    {
+      user_id: 1,
+      news_id: 6,
+    },
+    {
+      user_id: 2,
+      news_id: 7,
+    },
+    {
+      user_id: 3,
+      news_id: 7,
     },
   ]);
 };
