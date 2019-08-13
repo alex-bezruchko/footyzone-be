@@ -11,10 +11,10 @@ module.exports = {
 };
 
 function get() {
-  return db("users").select("id", "username", "password", "role_id");
+  return db("users").select("id", "username", "avatar", "password", "role_id");
 }
 
-function getById(id) {
+async function getById(id) {
   return db("users")
     .where({ id })
     .first();
@@ -44,6 +44,10 @@ async function findBy(nickname) {
 //     .update(changes);
 // }
 async function update(id, changes) {
+  console.log('id')
+  console.log(id)
+  console.log('changes')
+  console.log(changes)
   return db("users")
     .where({ id })
     .update(changes)

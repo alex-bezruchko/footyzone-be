@@ -67,21 +67,23 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:avatar", async (req, res) => {
-  console.log('req.body:')
-  console.log(req.body)
+  // console.log('req.body:')
+  // console.log(req.body)
   const avatar = req.params.avatar.toLowerCase();
   let updatedBody = req.body;
-  let newInfo = {};
   try {
     let currentUser = await userDb.findBy(avatar);
     if (currentUser) {
-      console.log(currentUser)
+      // console.log(currentUser)
+      let newInfo = {};
       newInfo.id = currentUser.id;
+      newInfo.username = currentUser.username;
       newInfo.password = currentUser.password;
-      newInfo.role_id = currentUser.role_id;
-      newInfo.username = updatedBody.username;
       newInfo.avatar = updatedBody.avatar;
+      newInfo.role_id = currentUser.role_id;
 
+      console.log('newInfo')
+      console.log(newInfo)
       let updatedUser = await userDb.update(newInfo.id, newInfo);
       if (updatedUser) {
         res.status(201).json({ updatedUser, message: "User was updated." });
