@@ -13,35 +13,6 @@ const path = require("path");
 const newUri = new dataUri();
 router.use(express.json());
 
-const storage = multer.memoryStorage();
-// Multer Filter
-const imageFilter = (req, file, cb) => {
-  if (
-    file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(new Error("Only jpeg, jpg, png files are allowed."), false);
-  }
-};
-
-// Multer Upload Config
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-    fileFilter: imageFilter,
-  },
-});
-
-cloudinary.config({
-  cloud_name: "htg1iqq1p",
-  api_key: "915419188456665",
-  api_secret: "M7938KD1Akyo8XBTmf7jF68jiHA",
-});
-
 router.use((err, req, res, next) => {
   res.status(500).json({
     message: "There was an error performing the required operation",
@@ -105,7 +76,7 @@ router.put("/:avatar", async (req, res) => {
     let currentUser = await userDb.findBy(avatar);
     if (currentUser) {
       console.log(currentUser)
-      newInfo.user_id = currentUser.user_id;
+      newInfo.user_id = currentUser.id;
       newInfo.password = currentUser.password;
       newInfo.role_id = currentUser.role_id;
       newInfo.username = updatedBody.username;
