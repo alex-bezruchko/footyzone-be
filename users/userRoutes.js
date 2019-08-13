@@ -101,7 +101,7 @@ router.put("/:avatar", (req, res) => {
   const id = req.params.id;
   const updatedUser = req.body;
   let newInfo = {};
-  let currentUser = userDb.findBy(avatar.toLowerCase());
+  let currentUser = userDb.findBy(req.params.avatar.toLowerCase());
 
   newInfo.user_id = currentUser.user_id;
   newInfo.username = updatedUser.username;
