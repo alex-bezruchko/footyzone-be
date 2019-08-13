@@ -103,8 +103,9 @@ router.put("/:avatar", (req, res) => {
 
   updatedUser.user_id = currentUser.user_id;
   updatedUser.avatar = updatedUser.avatar;
+  updatedUser.username = updatedUser.username;
   updatedUser.password = currentUser.password;
-  updatedUser.user_id = currentUser.user_id;
+  updatedUser.role_id = currentUser.role_id;
 
 
   userDb
