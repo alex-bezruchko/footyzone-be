@@ -67,7 +67,7 @@ function welcomeNews() {
 function latestNews() {
   return db("news").limit(10);
 }
-function latestOldSchool() {
+async function latestOldSchool() {
   return db("news").where("subcat_id", [7, 10]).limit(10);
 }
 
