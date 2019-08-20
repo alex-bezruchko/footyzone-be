@@ -3,6 +3,7 @@ const db = require("../dbConfig.js");
 module.exports = {
   welcomeNews,
   latestNews,
+  latestOldSchool,
   fetchAll,
   fetchAllCategories,
   fetchAllSubCategories,
@@ -65,6 +66,9 @@ function welcomeNews() {
 
 function latestNews() {
   return db("news").limit(10);
+}
+function latestOldSchool() {
+  return db("news").where({ category_id: 3 }).limit(10);
 }
 
 function fetchAll() {

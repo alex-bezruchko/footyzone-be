@@ -92,6 +92,20 @@ router.get("/latest", async (req, res) => {
   }
 });
 
+router.get("/latest/old-school", async (req, res) => {
+  const news = await newsDb.latestOldSchool();
+
+  try {
+    if (news) {
+      res.status(200).json(news);
+    } else {
+      res.status(404).json("There are no available news.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 router.get("/categories", async (req, res) => {
   const categories = await newsDb.fetchAllCategories();
 
