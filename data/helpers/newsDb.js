@@ -68,7 +68,7 @@ function latestNews() {
   return db("news").limit(10);
 }
 async function latestOldSchool() {
-  return db("news").whereIn("subcat_id", [7, 10]).limit(10);
+  return db("news").whereIn("subcat_id", [7, 8, 9]).limit(10);
 }
 
 function fetchAll() {
