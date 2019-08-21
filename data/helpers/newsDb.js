@@ -68,7 +68,29 @@ function latestNews() {
   return db("news").limit(10);
 }
 async function latestOldSchool() {
-  return db("news").whereIn("subcat_id", [7, 8, 9]).limit(10);
+  // return db("news").whereIn("subcat_id", [7, 8, 9]).limit(10);
+  return db
+    .select(
+      "news.id",
+      "news.title",
+      "news.summary",
+      "news.body",
+      "news.newsMainImg",
+      "news.user_id",
+      "news.subcat_id",
+      "users.username",
+      "users.avatar",
+      "subcategories.subcat_name",
+      "subcategories.logo",
+      "subcategories.subcat_slug"
+    )
+    .from("news")
+    .whereIn("news.subcat_id", [7, 8, 9])
+    .leftJoin("users", "users.id", "=", "news.user_id")
+    .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
+
+    .limit(6)
+    .orderBy("news.id");
 }
 
 function fetchAll() {
