@@ -63,8 +63,7 @@ function latestPosts() {
     .from("posts")
     .leftJoin("users", "users.id", "=", "posts.user_id")
 
-    .limit(4)
-    .offset(1)
+    .limit(5)
     .orderBy("posts.id");
 }
 function fetchAll() {
