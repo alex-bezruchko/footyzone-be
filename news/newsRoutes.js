@@ -220,6 +220,7 @@ router.get("/:subcat_slug/:id", async (req, res) => {
 
 router.get("/newslikes", async (req, res) => {
   // const id = req.params.id;
+  console.log('hello')
   try {
     const newslikes = await newsDb.fetchAllLikes();
     if (newslikes) {
@@ -229,6 +230,8 @@ router.get("/newslikes", async (req, res) => {
     }
   } catch (e) {
     console.log(e);
+    console.log('hello')
+
     res.status(500).json(e);
   }
 });

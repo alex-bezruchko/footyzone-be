@@ -26,6 +26,7 @@ module.exports = {
 function insertNewsTags(newsTag) {
   return db("tagnews").insert(newsTag, "id")
 }
+
 function getTagsById(tags_id) {
   return db("tags")
     .where({
@@ -33,6 +34,7 @@ function getTagsById(tags_id) {
     })
     .first();
 }
+
 async function insertNewsTags(tag) {
   return db("tags")
     .insert(tag, "id")
@@ -68,6 +70,7 @@ function welcomeNews() {
 function latestNews() {
   return db("news").limit(10);
 }
+
 async function latestOldSchool() {
   // return db("news").whereIn("subcat_id", [7, 8, 9]).limit(10);
   return db
@@ -116,7 +119,7 @@ function fetchAll() {
     .orderBy("news.id", "desc");
 }
 
-function fetchAllLikes() {
+async function fetchAllLikes() {
   return db("newslikes");
 }
 
