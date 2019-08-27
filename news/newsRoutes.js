@@ -225,7 +225,7 @@ router.get("/newslikes", async (req, res) => {
     if (newslikes) {
       res.status(200).json(newslikes);
     } else {
-      res.status(404).json("Newslikes are not unavailable.");
+      res.status(404).json({ message: "Newslikes are not unavailable." });
     }
   } catch (e) {
     console.log(e);
