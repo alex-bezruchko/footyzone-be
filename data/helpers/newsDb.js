@@ -20,6 +20,7 @@ module.exports = {
   fetchAllTags,
   insertTags,
   insertNewsTags,
+  insertLikes
 };
 
 function insertNewsTags(newsTag) {
@@ -200,6 +201,14 @@ function getById(news_id) {
     .innerJoin("subcategories", "subcategories.id", "=", "news.subcat_id")
 
     .first();
+}
+
+function insertLikes(like) {
+  return db("newslikes")
+    .insert(like, "id")
+    .then(ids => {
+      return fetchAllLikes(ids[0]);
+    });
 }
 
 function insert(news) {

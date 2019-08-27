@@ -218,6 +218,34 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
+router.post("/newslikes", async (req, res) => {
+  let newLike = req.body;
+  console.log(req.body);
+  try {
+    const likes = await newsDb.fetchAllLikes();
+    if (likes) {
+      let duplicate = likes.filter(like => (like.news_id === newLike.news_id && like.user_id === newLike.user_id))
+      if (duplicate && duplicate.length > 0) {
+        // let newLike =
+        let addedLike = await newsDb.insertLikes(newLike);
+        if (addedLike) {
+          res.status(201).json({ addedLike, message: "Like added successfully" })
+        }
+      } else {
+        res.status(400).json({ message: "Message duplicate" })
+      }
+    }
+
+
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      e,
+      message: "Server error"
+    });
+  }
+});
+
 // Post Tags
 
 router.post("/tags", async (req, res) => {
