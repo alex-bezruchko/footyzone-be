@@ -207,7 +207,7 @@ function insertLikes(like) {
   return db("newslikes")
     .insert(like, "id")
     .then(ids => {
-      return fetchAllLikes(ids[0]);
+      // return fetchAllLikes(ids[0]);
     });
 }
 
