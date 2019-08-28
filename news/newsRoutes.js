@@ -227,13 +227,13 @@ router.post("/newslikes", async (req, res) => {
       let duplicate = likes.filter(like => (like.news_id === newLike.news_id && like.user_id === newLike.user_id))
       if (duplicate || duplicate.length === 0) {
         // let newLike =
+        res.status(400).json({ message: "Message duplicate" })
+      } else {
         let addedLike = await newsDb.insertLikes(newLike);
         if (addedLike) {
           console.log(addedLike)
           res.status(201).json({ addedLike, message: "Like added successfully" })
         }
-      } else {
-        res.status(400).json({ message: "Message duplicate" })
       }
     }
   } catch (e) {
