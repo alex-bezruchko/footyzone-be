@@ -217,6 +217,21 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
+router.delete("/newslikes/:id", async (req, res) => {
+  const like_id = req.params.id;
+
+  try {
+    const deleted = await newsDb.deleteLike(like_id);
+
+    if (deleted) {
+      res.status(200).json("Newslike was successfully deleted.");
+    } else {
+      req.status(400).json("Newslike id is unavailable.");
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+})
 router.post("/newslikes", async (req, res) => {
   let newLike = req.body;
   console.log(req.body);

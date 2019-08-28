@@ -20,7 +20,8 @@ module.exports = {
   fetchAllTags,
   insertTags,
   insertNewsTags,
-  insertLikes
+  insertLikes,
+  deleteLike
 };
 
 function insertNewsTags(newsTag) {
@@ -251,6 +252,12 @@ async function update(id, changes) {
 function remove(id) {
   return db("news")
     .where("id", id)
+    .del();
+}
+
+function deleteLike(like_id) {
+  return db("newslikes")
+    .where("id", like_id)
     .del();
 }
 
