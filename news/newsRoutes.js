@@ -225,7 +225,7 @@ router.post("/newslikes", async (req, res) => {
     if (likes) {
       let duplicate = likes.filter(like => (like.news_id === newLike.news_id && like.user_id === newLike.user_id))
       console.log(duplicate)
-      if (duplicate.length > 0) {
+      if (duplicate && duplicate.length > 0) {
         // let newLike =
         res.status(400).json({ message: "Message duplicate" })
       } else {
