@@ -229,6 +229,7 @@ router.post("/newslikes", async (req, res) => {
         // let newLike =
         let addedLike = await newsDb.insertLikes(newLike);
         if (addedLike) {
+          console.log(addedLike)
           res.status(201).json({ addedLike, message: "Like added successfully" })
         }
       } else {
