@@ -218,15 +218,15 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
-router.get("/newslikes", async (req, res) => {
+router.get("/likes", async (req, res) => {
   // const id = req.params.id;
   console.log('hello')
   try {
-    const newslikes = await newsDb.fetchAllLikes();
+    let newslikes = await newsDb.fetchAllLikes();
     if (newslikes) {
       res.status(200).json(newslikes);
     } else {
-      res.status(404).json({ message: "Newslikes are not unavailable." });
+      res.status(404).json("Newslikes are not unavailable.");
     }
   } catch (e) {
     console.log(e);
@@ -253,8 +253,6 @@ router.post("/newslikes", async (req, res) => {
         res.status(400).json({ message: "Message duplicate" })
       }
     }
-
-
   } catch (e) {
     console.log(e);
     res.status(500).json({
