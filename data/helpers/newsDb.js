@@ -20,7 +20,7 @@ module.exports = {
   fetchAllTags,
   insertTags,
   insertNewsTags,
-  // insertLikes
+  insertLikes
 };
 
 function insertNewsTags(newsTag) {
@@ -206,13 +206,13 @@ function getById(news_id) {
     .first();
 }
 
-// function insertLikes(like) {
-//   return db("newslikes")
-//     .insert(like, "id")
-//     .then(ids => {
-//       // return fetchAllLikes(ids[0]);
-//     });
-// }
+function insertLikes(like) {
+  return db("newslikes")
+    .insert(like, "id")
+    .then(ids => {
+      // return fetchAllLikes(ids[0]);
+    });
+}
 
 function insert(news) {
   return db("news")
