@@ -171,6 +171,12 @@ function getLikesByNewsId(newsId) {
   });
 }
 
+function getLikesById(like_id) {
+  return db("newslikes").where({
+    id: like_id
+  });
+}
+
 function getTagsByNewsId(news_id) {
   // return db("tagnews").where({ news_id: news_id });
 
@@ -210,7 +216,7 @@ function insertLikes(like) {
   return db("newslikes")
     .insert(like, "id")
     .then(ids => {
-      // return fetchAllLikes(ids[0]);
+      return getLikesById(ids[0]);
     });
 }
 
