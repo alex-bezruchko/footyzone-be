@@ -20,7 +20,7 @@ module.exports = {
   fetchAllTags,
   insertTags,
   insertNewsTags,
-  insertLikes
+  // insertLikes
 };
 
 function insertNewsTags(newsTag) {
@@ -119,7 +119,7 @@ function fetchAll() {
     .orderBy("news.id", "desc");
 }
 
-async function fetchAllLikes() {
+function fetchAllLikes() {
   return db("newslikes");
 }
 
@@ -165,9 +165,9 @@ function getBySubCategoryId(subcat_id) {
     .leftJoin("subcategories", "subcategories.id", "=", "news.subcat_id");
 }
 
-function getLikesByNewsId(news_id) {
+function getLikesByNewsId(newsId) {
   return db("newslikes").where({
-    news_id: news_id
+    news_id: newsId
   });
 }
 
@@ -206,13 +206,13 @@ function getById(news_id) {
     .first();
 }
 
-function insertLikes(like) {
-  return db("newslikes")
-    .insert(like, "id")
-    .then(ids => {
-      // return fetchAllLikes(ids[0]);
-    });
-}
+// function insertLikes(like) {
+//   return db("newslikes")
+//     .insert(like, "id")
+//     .then(ids => {
+//       // return fetchAllLikes(ids[0]);
+//     });
+// }
 
 function insert(news) {
   return db("news")

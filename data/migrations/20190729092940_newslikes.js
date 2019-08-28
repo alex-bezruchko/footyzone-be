@@ -1,10 +1,10 @@
-exports.up = function(knex, Promise) {
-  return knex.schema.createTable("newslikes", function(newslikes) {
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable("newslikes", function (newslikes) {
     newslikes.increments();
     newslikes
       .integer("user_id")
       .unsigned()
-      .notNullable()
+      // .notNullable()
       .references("id")
       .inTable("users");
     newslikes
@@ -15,6 +15,6 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function (knex, Promise) {
   return knex.schema.dropTableIfExists("newslikes");
 };

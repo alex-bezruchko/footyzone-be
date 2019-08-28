@@ -218,24 +218,6 @@ router.get("/:subcat_slug/:id", async (req, res) => {
   }
 });
 
-router.get("/likes", async (req, res) => {
-  // const id = req.params.id;
-  console.log('hello')
-  try {
-    let newslikes = await newsDb.fetchAllLikes();
-    if (newslikes) {
-      res.status(200).json(newslikes);
-    } else {
-      res.status(404).json("Newslikes are not unavailable.");
-    }
-  } catch (e) {
-    console.log(e);
-    console.log('hello')
-
-    res.status(500).json(e);
-  }
-});
-
 router.post("/newslikes", async (req, res) => {
   let newLike = req.body;
   console.log(req.body);
