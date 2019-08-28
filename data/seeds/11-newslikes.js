@@ -17,9 +17,6 @@ exports.seed = function (knex, Promise) {
       news_id: 4,
     },
     {
-      8
-    },
-    {
       user_id: 4,
       news_id: 6,
     },
