@@ -1,9 +1,9 @@
 const express = require("express");
 const newsDb = require("./../data/helpers/newsDb.js");
 const router = express.Router();
+router.use(express.json());
 
-router.get("/latest/old-school", async (req, res) => {
-
+router.get("/", async (req, res) => {
     try {
         const news = await newsDb.fetchAllOldSchool();
         if (news) {
@@ -33,3 +33,4 @@ router.get("/latest/old-school", async (req, res) => {
     }
 
 });
+module.exports = router;
