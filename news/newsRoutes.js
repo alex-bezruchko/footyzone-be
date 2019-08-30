@@ -92,20 +92,6 @@ router.get("/latest", async (req, res) => {
   }
 });
 
-router.get("/latest/old-school", async (req, res) => {
-
-  try {
-    const news = await newsDb.latestOldSchool();
-    if (news) {
-      res.status(200).json(news);
-    } else {
-      res.status(404).json("There are no available news.");
-    }
-  } catch (e) {
-    console.log(e)
-    res.status(500).json(e);
-  }
-});
 
 router.get("/categories", async (req, res) => {
 
@@ -370,31 +356,6 @@ router.post("/", restricted, async (req, res) => {
     console.log(e);
     res.status(500).json(e);
   }
-
-  // const imageUri = req =>
-  //   newUri.format(
-  //     path.extname(req.file.originalname).toString(),
-  //     req.file.buffer
-  //   );
-
-  // const file = imageUri(req).content;
-
-  // cloudinary.uploader.upload(file, result => {
-  //   if (result) {
-  //     newNews.newsMainImg = result.secure_url;
-  //   } else {
-  //     newNews.newsMainImg = "";
-  //   }
-  // newsDb
-  //   .insert(newNews)
-  //   .then(addedNews => {
-
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   });
-  // });
 });
 
 router.put("/:id", restricted, upload.single("newsMainImg"), (req, res) => {
